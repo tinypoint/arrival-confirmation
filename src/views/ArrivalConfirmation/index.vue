@@ -268,10 +268,9 @@ export default {
     },
     methods: {
         handleSummary(param) {
-            const { columns, data } = param;
-            const sums = [];
+            const sums = ['汇总', 1, 2, 100, 401, 131]
 
-            return sums;
+            return sums
         },
         // 点击列表某一行时触发
         handleClickRow(row, event, column) {

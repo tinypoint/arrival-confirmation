@@ -139,7 +139,7 @@
                         height="100%">
                         <el-table-column
                             type="selection"
-                            width="40">
+                            width="60">
                         </el-table-column>
                         <el-table-column
                             label="序号"
@@ -393,7 +393,7 @@
                             height="100%">
                             <el-table-column
                                 type="selection"
-                                width="40">
+                                width="60">
                             </el-table-column>
                             <el-table-column
                                 label="序号"
@@ -429,7 +429,7 @@
                             height="100%">
                             <el-table-column
                                 type="selection"
-                                width="40">
+                                width="60">
                             </el-table-column>
                             <el-table-column
                                 label="序号"
@@ -696,7 +696,7 @@
                 height="300">
                 <el-table-column
                     type="selection"
-                    width="40">
+                    width="60">
                 </el-table-column>
                 <el-table-column
                     label="序号"
@@ -749,6 +749,10 @@
                     min-width="100">
                 </el-table-column>
             </el-table>
+            <div slot="footer">
+                <el-button @click="dialogTableVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
+            </div>
         </el-dialog>
     </el-container>
 </template>
@@ -766,6 +770,31 @@ export default {
             },
             tableData1: [
                 {
+                    index: 1,
+                    id: 18040001
+                },
+                {
+                    index: 1,
+                    id: 18040001
+                },
+                {
+                    index: 1,
+                    id: 18040001
+                },
+                {
+                    index: 1,
+                    id: 18040001
+                },
+                {
+                    index: 1,
+                    id: 18040001
+                },{
+                    index: 1,
+                    id: 18040001
+                },{
+                    index: 1,
+                    id: 18040001
+                },{
                     index: 1,
                     id: 18040001
                 }
@@ -830,11 +859,10 @@ export default {
             this.currentTab = tab
         },
         // 左侧列表下方的总结行的数据需要这个函数给返回
-        handleSummary() {
-            const { columns, data } = param;
-            const sums = [];
+        handleSummary(param) {
+            const sums = ['汇总', 1, 2, 100, 401, 131]
 
-            return sums;
+            return sums
         },
         // 右上角列表删除操作
         handleDelete(index, date) {

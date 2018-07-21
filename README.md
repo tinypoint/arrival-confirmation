@@ -1,21 +1,17 @@
 # arrival-confirmation
 
-## Project setup
+## 环境
+- node v8.11.3
+- npm v5.6.0
+## 进入项目目录，安装依赖
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+## 启动项目
 ```
-npm run serve
+npm serve
 ```
-
-### Compiles and minifies for production
+### 编译压缩，可用于部署到服务器上
 ```
 npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
