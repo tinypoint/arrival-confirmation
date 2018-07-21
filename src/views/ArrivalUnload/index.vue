@@ -1,134 +1,132 @@
 <template>
-    <el-container>
-        <el-header>
+    <el-container class="au-container">
+        <el-header class="au-header bottom-line">
             <el-row>
-                <el-col :span="6">
-                    <el-button type="primary" plain>卸货</el-button>
-                    <el-button type="primary" plain>二次发车</el-button>
+                <el-col :span="4">
+                    <el-button size="mini" type="primary" plain>卸货</el-button>
+                    <el-button size="mini" type="primary" plain>二次发车</el-button>
                 </el-col>
-                <el-col :span="18">
-                    <el-select style="width: 100px" v-model="printOption" placeholder="打印">
-                        <!-- <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option> -->
-                        <el-option label="全部" value="all"></el-option>
+                <el-col :span="20">
+                    <el-select size="mini" style="width: 100px" v-model="printOption" placeholder="打印">
+                        <el-option label="装车清单" value="0"></el-option>
+                        <el-option label="发车清单" value="1"></el-option>
+                        <el-option label="随车清单" value="2"></el-option>
                     </el-select>
-                    <el-button type="primary" plain class="ml-20">上传附件</el-button>
+                    <el-button size="mini" type="primary" plain class="ml-10">上传附件</el-button>
                 </el-col>
             </el-row>
         </el-header>
-        <el-main class="flex-1 flex-cloumn">
+        <el-main class="au-main flex-1 flex-cloumn pd-10">
             <!-- tab按钮 -->
-            <el-row>
-                <el-button @click="handleChangeTab('1')" :type="currentTab === '1'?'primary': ''" size="medium">派车</el-button>
-                <el-button @click="handleChangeTab('2')" :type="currentTab === '2'?'primary': ''" size="medium">添加订单</el-button>
+            <el-row class="bottom-line mt-10">
+                <el-button @click="handleChangeTab('1')" size="medium">派车</el-button>
+                <el-button @click="handleChangeTab('2')" size="medium">添加订单</el-button>
             </el-row>
-            <el-row class="sub-container flex-1" v-if="currentTab==='1'">
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="合同编号">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="发车日期">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="派车状态">
-                        <el-select class="form-control-sm-w" v-model="form.region" placeholder="请选择活动区域">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="制单人">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="发货网点">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-row class="block-title">
-                    调度信息：
-                </el-row>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="委托类型">
-                        <el-select class="form-control-sm-w" v-model="form.region" placeholder="请选择活动区域">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="承运商">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="车牌号">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="驾驶员">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="联系电话">
-                        <el-input class="form-control-md-w" v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="备注">
-                        <el-input style="width: 746px" v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-row class="block-title">
-                    本单费用：
-                </el-row>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="现付驾驶员">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="到付驾驶员">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="回付驾驶员">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="油卡卡号">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="油卡公司">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="油卡驾驶员">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="封布费">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="保险费">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="装卸费">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="落地费">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="其他费用">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="其他费用说明">
-                        <el-input v-model="form.name"></el-input>
-                    </el-form-item>
-                </el-form>
-                <el-form label-width="96px" size="small" :inline="true">
-                    <el-form-item label="费用合计">
-                        <el-input style="width: 746px" v-model="form.name"></el-input>
-                    </el-form-item>
+            <el-row class="flex-1" v-if="currentTab==='1'">
+                <el-form label-position="left" label-width="96px" size="small" :inline="true" class="au-form-wrapper">
+                    <el-row>
+                        <el-form-item label="合同编号：">
+                            <el-input disabled class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="发车日期：">
+                            <el-date-picker class="au-form-control" type="date" placeholder="选择日期" v-model="form.date1"></el-date-picker>
+                        </el-form-item>
+                        <el-form-item label="派车状态：">
+                            <el-select class="au-form-control" v-model="form.region" placeholder="请选择派车状态">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="制单人：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="发货网点：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row class="au-block-title">
+                        调度信息：
+                    </el-row>
+                    <el-row>
+                        <el-form-item label="委托类型：">
+                            <el-select class="au-form-control" v-model="form.region" placeholder="请选择委托类型">
+                                <el-option label="区域一" value="shanghai"></el-option>
+                                <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="承运商：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="车牌号：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="驾驶员：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="联系电话：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="备注：">
+                            <el-input class="au-form-control" style="width: 649px" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row class="au-block-title">
+                        本单费用：
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="现付驾驶员：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="到付驾驶员：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="回付驾驶员：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="油卡卡号：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="油卡公司：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="油卡驾驶员：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="封布费：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="保险费：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="装卸费：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="落地费：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="其他费用：">
+                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                        <el-form-item class="w-116" label="其他费用说明：">
+                            <el-input style="width: 126px;" class="au-form-control" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
+                    <el-row size="small" :inline="true">
+                        <el-form-item label="费用合计：">
+                            <el-input class="au-form-control" style="width: 649px" v-model="form.name"></el-input>
+                        </el-form-item>
+                    </el-row>
                 </el-form>
             </el-row>
-            <el-row :gutter="10" class="sub-container flex-1" v-if="currentTab==='2'">
+            <el-row :gutter="10" class="mt-10 flex-1" v-if="currentTab==='2'">
                 <el-col class="overflow-x-auto h-100" :span="12">
                     <el-table
                         size="small"
@@ -136,6 +134,7 @@
                         :data="tableData1"
                         tooltip-effect="dark"
                         border
+                        show-summary
                         height="100%">
                         <el-table-column
                             type="selection"
@@ -383,7 +382,7 @@
                 </el-col>
                 <el-col class="flex-cloumn h-100" :span="12">
                     <el-row class="posi-rela" style="height: 200px; margin-bottom: 10px">
-                        <el-button type="primary" size="small" class="add-site-btn">新增到货网点</el-button>
+                        <el-button type="primary" size="small" class="au-add-site-btn">新增到货网点</el-button>
                         <el-table
                             size="small"
                             ref="multipleTable"
@@ -414,7 +413,7 @@
                                 label="操作"
                                 width="100">
                                 <template slot-scope="scope">
-                                    <a class="del-site-btn" href="javascript:;" @click="handleDelete(scope.$index, scope.row)">删除</a>
+                                    <a class="au-del-site-btn" href="javascript:;" @click="handleDelete(scope.$index, scope.row)">删除</a>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -670,7 +669,7 @@
                 </el-col>
             </el-row>
         </el-main>
-        <el-footer>
+        <el-footer v-if="currentTab==='2'" class="au-footer">
             <el-row>
                 <el-col :span="12">
                     <el-button type="info" size="mini">列选择</el-button>
@@ -762,9 +761,9 @@
 export default {
     data () {
         return {
-            currentTab: '2',
+            currentTab: '1',
             printOption: '',
-            dialogTableVisible: true,
+            dialogTableVisible: false,
             form: {
 
             },
@@ -881,24 +880,106 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.block-title {
-    height: 60px;
+<style lang="scss">
+/* arrival unload */
+.au-container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    min-width: 1366px;
+    min-height: 768px;
 }
 
-.sub-container {
-    margin-top: 20px;
+.au-header, .au-footer {
+    line-height: 60px;
 }
 
-.add-site-btn {
+.au-main {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.au-main .el-button+.el-button {
+    margin-left: 5px;
+}
+
+.au-block-title {
+    height: 28px;
+    line-height: 28px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.au-add-site-btn {
     position: absolute;
     right: 20px;
     top: 20px;
     z-index: 100;
 }
 
-.del-site-btn {
+.au-del-site-btn {
     text-decoration: none;
     color: #409EFF;
+}
+
+.au-form-wrapper {
+    padding: 10px;
+    border: 1px solid #409EFF;
+    .el-form-item__label {
+        font-weight: bold;
+    }
+    .el-form-item {
+        margin-bottom: 10px;
+    }
+}
+
+.au-form-control {
+    width: 145px;
+    .el-input__inner {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+    }
+    &.el-date-editor {
+        width: 145px;
+    }
+}
+
+.w-116 {
+    .el-form-item__label {
+        width: 116px !important;
+    }
+}
+
+/* css global util */
+.flex-1 {
+    flex: 1;
+}
+
+.flex-cloumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.posi-rela {
+    position: relative;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.bottom-line {
+    border-bottom: 1px solid  #dcdfe6;
 }
 </style>

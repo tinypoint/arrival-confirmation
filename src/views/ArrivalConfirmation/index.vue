@@ -1,56 +1,55 @@
 <template>
-    <el-container>
-        <el-header>
+    <el-container class="ac-container">
+        <el-header class="ac-header bottom-line">
             <el-row>
-                <el-col :span="6">
-                    <el-button type="primary" plain>到货确认</el-button>
+                <el-col :span="4">
+                    <el-button size="mini" type="primary" plain>到货确认</el-button>
                 </el-col>
-                <el-col :span="18">
-                    <el-select style="width: 100px" v-model="printOption" placeholder="打印">
-                        <!-- <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                        </el-option> -->
-                        <el-option label="全部" value="all"></el-option>
+                <el-col :span="20">
+                    <el-select size="mini" style="width: 100px" v-model="printOption" placeholder="打印">
+                        <el-option label="装车清单" value="0"></el-option>
+                        <el-option label="发车清单" value="1"></el-option>
+                        <el-option label="随车清单" value="2"></el-option>
                     </el-select>
-                    <el-button type="primary" plain class="ml-20">上传附件</el-button>
+                    <el-button size="mini" type="primary" plain class="ml-10">上传附件</el-button>
                 </el-col>
             </el-row>
         </el-header>
-        <el-main class="flex-1 flex-cloumn">
+        <el-main class="ac-main flex-1 flex-cloumn pd-10">
             <!-- tab按钮 -->
-            <el-row>
-                <el-button type="primary" size="medium">全部</el-button>
+            <el-row class="bottom-line mt-10">
+                <el-button size="medium">全部</el-button>
                 <el-button size="medium">在途</el-button>
                 <el-button size="medium">到达</el-button>
             </el-row>
             <!-- 表单筛选栏 -->
-            <el-form size="small" :inline="true" :model="formFilter" class="form-wrapper">
+            <el-form size="mini" :inline="true" :model="formFilter" class="form-wrapper">
                 <el-form-item label="合同号">
-                    <el-input v-model="formFilter.user" ></el-input>
+                    <el-input placeholder="请输入合同号" v-model="formFilter.contractId" ></el-input>
                 </el-form-item>
                 <el-form-item label="发车状态">
-                    <el-select style="width: 120px" v-model="formFilter.region">
-                        <el-option label="区域一" value="shanghai"></el-option>
-                        <el-option label="区域二" value="beijing"></el-option>
+                    <el-select placeholder="请选择" style="width: 120px" v-model="formFilter.carStatus">
+                        <el-option label="全部" value="all"></el-option>
+                        <el-option label="已调度" value="dispatched"></el-option>
+                        <el-option label="已装车" value="loaded"></el-option>
+                        <el-option label="已发车" value="started"></el-option>
+                        <el-option label="已到货" value="arrivaled"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="发车日期">
                     <el-col :span="11">
-                        <el-date-picker type="date" v-model="formFilter.date1" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" v-model="formFilter.startDate" style="width: 100%;"></el-date-picker>
                     </el-col>
-                    <el-col class="line" :span="2">到</el-col>
+                    <el-col class="ac-line" :span="2">到</el-col>
                     <el-col :span="11">
-                        <el-date-picker type="date" v-model="formFilter.date2" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" v-model="formFilter.endDate" style="width: 100%;"></el-date-picker>
                     </el-col>
                 </el-form-item>
                 <el-form-item label="网点">
-                    <el-input v-model="formFilter.user" ></el-input>
+                    <el-input placeholder="请输入网点" v-model="formFilter.site" ></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">查询</el-button>
+                    <el-button @click="handleClickSearch" size="mini" type="primary">查询</el-button>
                 </el-form-item>
             </el-form>
             <!-- 表格 -->
@@ -58,13 +57,11 @@
                 size="small"
                 ref="multipleTable"
                 :data="tableData"
-                tooltip-effect="dark"
                 border
                 show-summary
-                :summary-method="handleSummary"
                 style="width: 100%"
                 height="100%"
-                @row-click="handleClickRow">
+                @row-dblclick="handleClickRow">
                 <el-table-column
                     type="selection"
                     width="60">
@@ -77,62 +74,51 @@
                 <el-table-column
                     prop="name"
                     label="合同号"
-                    width="120"
-                    show-overflow-tooltip>
+                    width="120">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="发车日期"
-                    show-overflow-tooltip>
+                    label="发车日期">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="发车状态"
-                    show-overflow-tooltip>
+                    label="发车状态">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="发车网点"
-                    show-overflow-tooltip>
+                    label="发车网点">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="卸货网点"
-                    show-overflow-tooltip>
+                    label="卸货网点">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="车牌号"
-                    show-overflow-tooltip>
+                    label="车牌号">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="联系方式"
-                    show-overflow-tooltip>
+                    label="联系方式">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="调度员"
-                    show-overflow-tooltip>
+                    label="调度员">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="总件数"
-                    show-overflow-tooltip>
+                    label="总件数">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="总重量（公斤）"
-                    show-overflow-tooltip>
+                    label="总重量（公斤）">
                 </el-table-column>
                 <el-table-column
                     prop="address"
-                    label="总体积（立方）"
-                    show-overflow-tooltip>
+                    label="总体积（立方）">
                 </el-table-column>
             </el-table>
         </el-main>
-        <el-footer>
+        <el-footer class="ac-footer">
             <el-col :span="24">
                 <el-button type="info" size="mini">列选择</el-button>
                 <el-button type="info" size="mini">列搜索</el-button>
@@ -149,128 +135,54 @@ export default {
         return {
             printOption: '',
             formFilter: {
-
+                contractId: '',
+                carStatus: '',
+                startDate: '',
+                endDate: '',
+                site: ''
             },
             tableData: [{
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
+                address: '上海市 1518 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
+                address: '上海市 1517 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
+                address: '上海市 1517 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
+                address: '上海市 1519 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
+                address: '上海市 1516 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
+                address: '上海市 1518 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
+                address: '上海市 1517 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
+                address: '上海市 1519 弄'
             }, {
                 id: '1',
                 name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
+                address: '上海市 1516 弄'
             }]
         }
     },
     methods: {
-        handleSummary(param) {
-            const sums = ['汇总', 1, 2, 100, 401, 131]
-
-            return sums
+        handleClickSearch() {
+            console.log(this.formFilter)
         },
         // 点击列表某一行时触发
         handleClickRow(row, event, column) {
@@ -281,16 +193,60 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+/* arrival confirmation */
+.ac-container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    min-width: 1366px;
+    min-height: 768px;
+}
+
+.ac-header, .ac-footer {
+    line-height: 60px;
+}
+
+.ac-main {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ac-main .el-button+.el-button {
+    margin-left: 5px;
+}
+/* css global util */
+.flex-1 {
+    flex: 1;
+}
+
+.flex-cloumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mt-10 {
+    margin-top: 20px;
+}
+
+.ac-line {
+    color: #606266;
+    text-align: center;
+}
 
 .form-wrapper {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 3px;
-    border: 1px solid #dcdfe6;
+    margin: 5px 0;
     .el-form-item {
         margin-bottom: 0px;
+        font-weight: bold;
     }
 }
 
+.bottom-line {
+    border-bottom: 1px solid  #dcdfe6;
+}
 </style>
