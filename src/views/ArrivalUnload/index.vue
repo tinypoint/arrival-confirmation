@@ -684,6 +684,72 @@
                 </el-col>
             </el-row>
         </el-footer>
+        <el-dialog :visible.sync="dialogTableVisible">
+            <el-table
+                size="small"
+                ref="multipleTable"
+                :data="tableData1"
+                tooltip-effect="dark"
+                border
+                show-summary
+                :summary-method="handleSummary"
+                height="300">
+                <el-table-column
+                    type="selection"
+                    width="40">
+                </el-table-column>
+                <el-table-column
+                    label="序号"
+                    prop='index'
+                    width="60">
+                </el-table-column>
+                <el-table-column
+                    label="托运商单号"
+                    prop="id"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="开单日期"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="发站"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="到站"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="发货网点"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="目的网点"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="品名"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="件数"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="重量（公斤）"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="体积（立方）"
+                    min-width="100">
+                </el-table-column>
+                <el-table-column
+                    label="储位"
+                    min-width="100">
+                </el-table-column>
+            </el-table>
+        </el-dialog>
     </el-container>
 </template>
 
@@ -694,6 +760,7 @@ export default {
         return {
             currentTab: '2',
             printOption: '',
+            dialogTableVisible: true,
             form: {
 
             },
@@ -743,6 +810,17 @@ export default {
                     index: 1,
                     id: 18040001
                 }
+            ],
+            dialogTableData: [
+                {
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }
             ]
         }
     },
@@ -755,26 +833,6 @@ export default {
         handleSummary() {
             const { columns, data } = param;
             const sums = [];
-            columns.forEach((column, index) => {
-                if (index === 0) {
-                    sums[index] = '总价';
-                    return;
-                }
-                const values = data.map(item => Number(item[column.property]));
-                if (!values.every(value => isNaN(value))) {
-                    sums[index] = values.reduce((prev, curr) => {
-                    const value = Number(curr);
-                    if (!isNaN(value)) {
-                        return prev + curr;
-                    } else {
-                        return prev;
-                    }
-                    }, 0);
-                    sums[index] += ' 元';
-                } else {
-                    sums[index] = 'N/A';
-                }
-            });
 
             return sums;
         },

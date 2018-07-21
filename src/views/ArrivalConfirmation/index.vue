@@ -63,15 +63,16 @@
                 show-summary
                 :summary-method="handleSummary"
                 style="width: 100%"
-                height="100%">
+                height="100%"
+                @row-click="handleClickRow">
                 <el-table-column
                     type="selection"
                     width="60">
                 </el-table-column>
                 <el-table-column
+                    prop="id"
                     label="序号"
                     width="60">
-                    <template slot-scope="scope">{{ scope.row.date }}</template>
                 </el-table-column>
                 <el-table-column
                     prop="name"
@@ -151,115 +152,115 @@ export default {
 
             },
             tableData: [{
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1517 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1519 弄'
             }, {
-                date: '1',
+                id: '1',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
             }]
@@ -269,28 +270,13 @@ export default {
         handleSummary(param) {
             const { columns, data } = param;
             const sums = [];
-            columns.forEach((column, index) => {
-                if (index === 0) {
-                    sums[index] = '总价';
-                    return;
-                }
-                const values = data.map(item => Number(item[column.property]));
-                if (!values.every(value => isNaN(value))) {
-                    sums[index] = values.reduce((prev, curr) => {
-                    const value = Number(curr);
-                    if (!isNaN(value)) {
-                        return prev + curr;
-                    } else {
-                        return prev;
-                    }
-                    }, 0);
-                    sums[index] += ' 元';
-                } else {
-                    sums[index] = 'N/A';
-                }
-            });
 
             return sums;
+        },
+        // 点击列表某一行时触发
+        handleClickRow(row, event, column) {
+            let id = row.id
+            this.$router.push({ name: 'arrivalUnload', params: { id }})
         }
     }
 }
