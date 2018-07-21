@@ -2,32 +2,30 @@
     <el-container>
         <el-header>
             <el-row>
-                <el-col :span="24">
-                    <el-col :span="4">
-                        <el-button type="primary" plain>到货确认</el-button>
-                    </el-col>
-                    <el-col :span="20">
-                        <el-select style="width: 100px" v-model="printOption" placeholder="打印">
-                            <!-- <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                            </el-option> -->
-                            <el-option label="全部" value="all"></el-option>
-                        </el-select>
-                        <el-button type="primary" plain class="ml-20">上传附件</el-button>
-                    </el-col> 
+                <el-col :span="6">
+                    <el-button type="primary" plain>到货确认</el-button>
+                </el-col>
+                <el-col :span="18">
+                    <el-select style="width: 100px" v-model="printOption" placeholder="打印">
+                        <!-- <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                        </el-option> -->
+                        <el-option label="全部" value="all"></el-option>
+                    </el-select>
+                    <el-button type="primary" plain class="ml-20">上传附件</el-button>
                 </el-col>
             </el-row>
         </el-header>
         <el-main class="flex-1 flex-cloumn">
             <!-- tab按钮 -->
-            <el-col :span="24">
+            <el-row>
                 <el-button type="primary" size="medium">全部</el-button>
                 <el-button size="medium">在途</el-button>
                 <el-button size="medium">到达</el-button>
-            </el-col>
+            </el-row>
             <!-- 表单筛选栏 -->
             <el-form size="small" :inline="true" :model="formFilter" class="form-wrapper">
                 <el-form-item label="合同号">
@@ -312,44 +310,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.el-header, .el-footer {
-    line-height: 60px;
-    background-color: #E9EEF3;
-}
-
-.flex-1 {
-    flex: 1;
-}
-
-.flex-cloumn {
-    display: flex;
-    flex-direction: column;
-}
-
-#app > .el-container {
-    height: 100%;
-}
-
-.ml-20 {
-    margin-left: 20px;
-}
-
-.mr-20 {
-    margin-right: 20px;
-}
-
-.mt-20 {
-    margin-top: 20px;
-}
-
-.mb-20 {
-    margin-bottom: 20px;
-}
-
-.line {
-    color: #606266;
-    text-align: center;
-}
 
 .form-wrapper {
     padding: 10px;
