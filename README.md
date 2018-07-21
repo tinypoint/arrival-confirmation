@@ -9,7 +9,7 @@ npm install
 ```
 ## 启动项目
 ```
-npm serve
+npm run serve
 ```
 ### 编译压缩，可用于部署到服务器上
 ```
