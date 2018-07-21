@@ -11,7 +11,7 @@ html, body {
 
 html {
   min-width: 1366px;
-  im-height: 677px;
+  min-height: 677px;
 }
 
 #app {
@@ -68,4 +68,15 @@ html {
     width: 150px;
 }
 
+.h-100 {
+    height: 100%;
+}
+
+.posi-rela {
+    position: relative;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
 </style>

@@ -65,79 +65,66 @@
                 style="width: 100%"
                 height="100%">
                 <el-table-column
-                    align="center"
                     type="selection"
                     width="60">
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     label="序号"
                     width="60">
                     <template slot-scope="scope">{{ scope.row.date }}</template>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="name"
                     label="合同号"
                     width="120"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="发车日期"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="发车状态"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="发车网点"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="卸货网点"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="车牌号"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="联系方式"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="调度员"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="总件数"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="总重量（公斤）"
                     show-overflow-tooltip>
                 </el-table-column>
                 <el-table-column
-                    align="center"
                     prop="address"
                     label="总体积（立方）"
                     show-overflow-tooltip>
