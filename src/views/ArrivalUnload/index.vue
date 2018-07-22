@@ -7,7 +7,7 @@
                     <el-button size="mini" type="primary" plain>二次发车</el-button>
                 </el-col>
                 <el-col :span="20">
-                    <el-select size="mini" style="width: 100px" v-model="printOption" placeholder="打印">
+                    <el-select v-model="printOption" size="mini" style="width: 100px" placeholder="打印">
                         <el-option label="装车清单" value="0"></el-option>
                         <el-option label="发车清单" value="1"></el-option>
                         <el-option label="随车清单" value="2"></el-option>
@@ -19,29 +19,29 @@
         <el-main class="au-main flex-1 flex-cloumn pd-10">
             <!-- tab按钮 -->
             <el-row class="bottom-line mt-10">
-                <el-button @click="handleChangeTab('1')" size="medium">派车</el-button>
-                <el-button @click="handleChangeTab('2')" size="medium">添加订单</el-button>
+                <el-button size="medium" @click="handleChangeTab('1')">派车</el-button>
+                <el-button size="medium" @click="handleChangeTab('2')">添加订单</el-button>
             </el-row>
-            <el-row class="flex-1" v-if="currentTab==='1'">
-                <el-form v-model="form" label-position="left" label-width="96px" size="small" :inline="true" class="au-form-wrapper">
+            <el-row v-if="currentTab==='1'" class="flex-1">
+                <el-form v-model="form" :inline="true" label-position="left" label-width="96px" size="small" class="au-form-wrapper">
                     <el-row>
                         <el-form-item label="合同编号：">
-                            <el-input disabled class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" disabled class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="发车日期：">
-                            <el-date-picker class="au-form-control" type="date" placeholder="选择日期" v-model="form.date1"></el-date-picker>
+                            <el-date-picker v-model="form.date1" class="au-form-control" type="date" placeholder="选择日期"></el-date-picker>
                         </el-form-item>
                         <el-form-item label="派车状态：">
-                            <el-select class="au-form-control" v-model="form.region" placeholder="请选择派车状态">
+                            <el-select v-model="form.region" class="au-form-control" placeholder="请选择派车状态">
                                 <el-option label="区域一" value="shanghai"></el-option>
                                 <el-option label="区域二" value="beijing"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item label="制单人：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="发货网点：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
                     <el-row class="au-block-title">
@@ -49,89 +49,89 @@
                     </el-row>
                     <el-row>
                         <el-form-item label="委托类型：">
-                            <el-select class="au-form-control" v-model="form.region" placeholder="请选择委托类型">
+                            <el-select v-model="form.region"  class="au-form-control" placeholder="请选择委托类型">
                                 <el-option label="区域一" value="shanghai"></el-option>
                                 <el-option label="区域二" value="beijing"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item label="承运商：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name"  class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="车牌号：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name"  class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="驾驶员：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name"  class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="联系电话：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name"  class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="备注：">
-                            <el-input class="au-form-control" style="width: 649px" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control" style="width: 649px"></el-input>
                         </el-form-item>
                     </el-row>
                     <el-row class="au-block-title">
                         本单费用：
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="现付驾驶员：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="到付驾驶员：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="回付驾驶员：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="油卡卡号：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="油卡公司：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="油卡驾驶员：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="封布费：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="保险费：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="装卸费：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="落地费：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item label="其他费用：">
-                            <el-input class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control"></el-input>
                         </el-form-item>
                         <el-form-item class="w-116" label="其他费用说明：">
-                            <el-input style="width: 126px;" class="au-form-control" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" style="width: 126px;" class="au-form-control"></el-input>
                         </el-form-item>
                     </el-row>
-                    <el-row size="small" :inline="true">
+                    <el-row :inline="true">
                         <el-form-item label="费用合计：">
-                            <el-input class="au-form-control" style="width: 649px" v-model="form.name"></el-input>
+                            <el-input v-model="form.name" class="au-form-control" style="width: 649px"></el-input>
                         </el-form-item>
                     </el-row>
                 </el-form>
             </el-row>
-            <el-row :gutter="10" class="flex-1" v-if="currentTab==='2'">
-                <el-col class="overflow-x-auto h-100" :span="12">
+            <el-row v-if="currentTab==='2'" :gutter="10" class="flex-1">
+                <el-col :span="12" class="overflow-x-auto h-100">
                     <el-table
-                        size="small"
                         ref="multipleTable"
                         :data="tableData1"
+                        size="small"
                         tooltip-effect="dark"
                         border
                         show-summary
@@ -142,7 +142,7 @@
                         </el-table-column>
                         <el-table-column
                             label="序号"
-                            prop='index'
+                            prop="index"
                             width="60">
                         </el-table-column>
                         <el-table-column
@@ -438,13 +438,13 @@
                         </el-table-column>
                     </el-table>
                 </el-col>
-                <el-col class="flex-cloumn h-100" :span="12">
+                <el-col :span="12" class="flex-cloumn h-100">
                     <el-row class="posi-rela" style="height: 200px; margin-bottom: 10px">
                         <el-button type="primary" size="small" class="au-add-site-btn">新增到货网点</el-button>
                         <el-table
-                            size="small"
                             ref="multipleTable"
                             :data="tableData2"
+                            size="small"
                             tooltip-effect="dark"
                             border
                             height="100%">
@@ -454,17 +454,17 @@
                             </el-table-column>
                             <el-table-column
                                 label="序号"
-                                prop='index'
+                                prop="index"
                                 width="60">
                             </el-table-column>
                             <el-table-column
                                 label="卸货网点"
-                                prop='site'
+                                prop="site"
                                 width="100">
                             </el-table-column>
                             <el-table-column
                                 label="单数"
-                                prop='num'
+                                prop="num"
                                 width="100">
                             </el-table-column>
                             <el-table-column
@@ -478,9 +478,9 @@
                     </el-row>
                     <el-row class="overflow-x-auto flex-1">
                         <el-table
-                            size="small"
                             ref="multipleTable"
                             :data="tableData3"
+                            size="small"
                             tooltip-effect="dark"
                             border
                             height="100%">
@@ -490,7 +490,7 @@
                             </el-table-column>
                             <el-table-column
                                 label="序号"
-                                prop='index'
+                                prop="index"
                                 width="60">
                             </el-table-column>
                             <el-table-column
@@ -787,12 +787,12 @@
         <el-footer v-if="currentTab==='2'" class="au-footer">
             <el-row>
                 <el-col :span="12">
-                    <el-button @click="leftTableDialog=true" type="info" size="mini">列选择</el-button>
+                    <el-button size="mini" type="info" @click="leftTableDialog=true">列选择</el-button>
                     <el-button type="info" size="mini">列搜索</el-button>
                     <el-button type="info" size="mini">导出</el-button>
                 </el-col>
                 <el-col :span="12">
-                    <el-button @click="rightTableDialog=true" type="info" size="mini">列选择</el-button>
+                    <el-button size="mini" type="info" @click="rightTableDialog=true" >列选择</el-button>
                     <el-button type="info" size="mini">列搜索</el-button>
                     <el-button type="info" size="mini">导出</el-button>
                 </el-col>
@@ -800,13 +800,13 @@
         </el-footer>
         <el-dialog :visible.sync="dialogTableVisible">
             <el-table
-                size="small"
                 ref="multipleTable"
                 :data="tableData1"
+                :summary-method="handleSummary"
+                show-summary
+                size="small"
                 tooltip-effect="dark"
                 border
-                show-summary
-                :summary-method="handleSummary"
                 height="300">
                 <el-table-column
                     type="selection"
@@ -814,7 +814,7 @@
                 </el-table-column>
                 <el-table-column
                     label="序号"
-                    prop='index'
+                    prop="index"
                     width="60">
                 </el-table-column>
                 <el-table-column
@@ -868,13 +868,13 @@
                 <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
             </div>
         </el-dialog>
-        <el-dialog title="列选择" :visible.sync="leftTableDialog">
-            <el-checkbox-group class="au-checkbox-group flex-cloumn" v-model="leftChoosenColumns">
+        <el-dialog :visible.sync="leftTableDialog" title="列选择">
+            <el-checkbox-group v-model="leftChoosenColumns" class="au-checkbox-group flex-cloumn">
                 <el-checkbox v-for="column in leftColumns" :label="column" :key="column">{{column}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
-        <el-dialog title="列选择" :visible.sync="rightTableDialog">
-            <el-checkbox-group class="au-checkbox-group flex-cloumn" v-model="rightChoosenColumns">
+        <el-dialog :visible.sync="rightTableDialog" title="列选择">
+            <el-checkbox-group v-model="rightChoosenColumns" class="au-checkbox-group flex-cloumn">
                 <el-checkbox v-for="column in rightColumns" :label="column" :key="column">{{column}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
@@ -1059,22 +1059,26 @@ export default {
         },
         // 左侧列表下方的总结行的数据需要这个函数给返回
         handleSummary(param) {
+            console.log(param)
             const sums = ['汇总', 1, 2, 100, 401, 131]
 
             return sums
         },
         // 右上角列表删除操作
         handleDelete(index, date) {
-
+            console.log(date)
+            this.tableData2.splice(index, 1)
         }
     },
     mounted() {
         let currentId = this.$route.params.id
+        console.log(currentId)
     },
     // 监听路由变化
     watch: {
         '$route' (to, from) {
             let currentId = to.params.id
+            console.log(currentId, from)
         }
     }
 }

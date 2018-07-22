@@ -6,7 +6,7 @@
                     <el-button size="mini" type="primary" plain>到货确认</el-button>
                 </el-col>
                 <el-col :span="20">
-                    <el-select size="mini" style="width: 100px" v-model="printOption" placeholder="打印">
+                    <el-select v-model="printOption" size="mini" style="width: 100px" placeholder="打印">
                         <el-option label="装车清单" value="0"></el-option>
                         <el-option label="发车清单" value="1"></el-option>
                         <el-option label="随车清单" value="2"></el-option>
@@ -23,12 +23,12 @@
                 <el-button size="medium">到达</el-button>
             </el-row>
             <!-- 表单筛选栏 -->
-            <el-form size="mini" :inline="true" :model="formFilter" class="form-wrapper">
+            <el-form :inline="true" :model="formFilter" class="form-wrapper" size="mini">
                 <el-form-item label="合同号">
-                    <el-input placeholder="请输入合同号" v-model="formFilter.contractId" ></el-input>
+                    <el-input v-model="formFilter.contractId" placeholder="请输入合同号" ></el-input>
                 </el-form-item>
                 <el-form-item label="发车状态">
-                    <el-select placeholder="请选择" style="width: 120px" v-model="formFilter.carStatus">
+                    <el-select v-model="formFilter.carStatus" placeholder="请选择" style="width: 120px">
                         <el-option label="全部" value="all"></el-option>
                         <el-option label="已调度" value="dispatched"></el-option>
                         <el-option label="已装车" value="loaded"></el-option>
@@ -38,25 +38,25 @@
                 </el-form-item>
                 <el-form-item label="发车日期">
                     <el-col :span="11">
-                        <el-date-picker type="date" v-model="formFilter.startDate" style="width: 100%;"></el-date-picker>
+                        <el-date-picker v-model="formFilter.startDate" type="date"  style="width: 100%;"></el-date-picker>
                     </el-col>
-                    <el-col class="ac-line" :span="2">到</el-col>
+                    <el-col :span="2" class="ac-line">到</el-col>
                     <el-col :span="11">
-                        <el-date-picker type="date" v-model="formFilter.endDate" style="width: 100%;"></el-date-picker>
+                        <el-date-picker v-model="formFilter.endDate" type="date" style="width: 100%;"></el-date-picker>
                     </el-col>
                 </el-form-item>
                 <el-form-item label="网点">
-                    <el-input placeholder="请输入网点" v-model="formFilter.site" ></el-input>
+                    <el-input v-model="formFilter.site" placeholder="请输入网点"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button @click="handleClickSearch" size="mini" type="primary">查询</el-button>
+                    <el-button size="mini" type="primary" @click="handleClickSearch">查询</el-button>
                 </el-form-item>
             </el-form>
             <!-- 表格 -->
             <el-table
-                size="small"
                 ref="multipleTable"
                 :data="tableData"
+                size="small"
                 border
                 show-summary
                 style="width: 100%"
@@ -72,72 +72,72 @@
                     width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="contractId"
                     v-if="choosenColumns.indexOf('合同号') > -1"
+                    prop="contractId"
                     label="合同号"
                     width="120">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('发车日期') > -1"
+                    prop="address"
                     label="发车日期">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('发车状态') > -1"
+                    prop="address"
                     label="发车状态">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('发车网点') > -1"
+                    prop="address"
                     label="发车网点">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('卸货网点') > -1"
+                    prop="address"
                     label="卸货网点">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('车牌号') > -1"
+                    prop="address"
                     label="车牌号">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('联系方式') > -1"
+                    prop="address"
                     label="联系方式">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('调度员') > -1"
+                    prop="address"
                     label="调度员">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('总件数') > -1"
+                    prop="address"
                     label="总件数">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('总重量（公斤）') > -1"
+                    prop="address"
                     label="总重量（公斤）">
                 </el-table-column>
                 <el-table-column
-                    prop="address"
                     v-if="choosenColumns.indexOf('总体积（立方）') > -1"
+                    prop="address"
                     label="总体积（立方）">
                 </el-table-column>
             </el-table>
         </el-main>
         <el-footer class="ac-footer">
             <el-col :span="24">
-                <el-button @click="dialogChooseColumnVisible = true" type="info" size="mini">列选择</el-button>
+                <el-button type="info" size="mini" @click="dialogChooseColumnVisible = true">列选择</el-button>
                 <el-button type="info" size="mini">列搜索</el-button>
                 <el-button type="info" size="mini">导出</el-button>
             </el-col>
         </el-footer>
-        <el-dialog title="列选择" :visible.sync="dialogChooseColumnVisible">
-            <el-checkbox-group class="ac-checkbox-group flex-cloumn" v-model="choosenColumns">
+        <el-dialog :visible.sync="dialogChooseColumnVisible" title="列选择">
+            <el-checkbox-group v-model="choosenColumns" class="ac-checkbox-group flex-cloumn">
                 <el-checkbox v-for="column in columns" :label="column" :key="column">{{column}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
@@ -185,7 +185,7 @@ export default {
             console.log(this.formFilter)
         },
         // 点击列表某一行时触发
-        handleClickRow(row, event, column) {
+        handleClickRow(row) {
             let id = row.id
             this.$router.push({ name: 'arrivalUnload', params: { id }})
         }

@@ -12,7 +12,7 @@ module.exports = {
     'no-debugger': 'off',
     'vue/html-indent': [
       'error',
-      2
+      4
     ],
     'vue/attributes-order': 'error',
     'vue/html-quotes': [
