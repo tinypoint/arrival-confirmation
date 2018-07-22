@@ -19,8 +19,24 @@
         <el-main class="au-main flex-1 flex-cloumn pd-10">
             <!-- tab按钮 -->
             <el-row class="bottom-line mt-10">
-                <el-button size="medium" @click="handleChangeTab('1')">派车</el-button>
-                <el-button size="medium" @click="handleChangeTab('2')">添加订单</el-button>
+                <el-col :span="4">
+                    <el-button size="medium" @click="handleChangeTab('1')">派车</el-button>
+                    <el-button size="medium" @click="handleChangeTab('2')">添加订单</el-button>
+                </el-col>
+                <el-col :span="20">
+                    <el-form v-if="currentTab==='2'" v-model="fast" :inline="true" size="small" class="au-fast-form">
+                        <el-form-item label="快速添加：">
+                            <el-input v-model="fast.add"></el-input>
+                        </el-form-item>
+                        <el-button size="small" icon="el-icon-arrow-right"></el-button>
+                        <el-button size="small" icon="el-icon-d-arrow-right"></el-button>
+                        <el-button size="small" icon="el-icon-d-arrow-left"></el-button>
+                        <el-button size="small" icon="el-icon-arrow-left"></el-button>
+                        <el-form-item label="快速删除：" class="ml-10">
+                            <el-input v-model="fast.del"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </el-col>
             </el-row>
             <el-row v-if="currentTab==='1'" class="flex-1">
                 <el-form v-model="form" :inline="true" label-position="left" label-width="96px" size="small" class="au-form-wrapper">
@@ -440,7 +456,7 @@
                 </el-col>
                 <el-col :span="12" class="flex-cloumn h-100">
                     <el-row class="posi-rela" style="height: 200px; margin-bottom: 10px">
-                        <el-button type="primary" size="small" class="au-add-site-btn">新增到货网点</el-button>
+                        <el-button type="primary" size="small" class="au-add-site-btn" @click="handleAddSite">新增到货网点</el-button>
                         <el-table
                             ref="multipleTable"
                             :data="tableData2"
@@ -1006,7 +1022,10 @@ export default {
         return {
             currentTab: '1',
             printOption: '',
-            dialogTableVisible: false,
+            fast: {
+                add: '',
+                del: ''
+            },
             form: {
 
             },
@@ -1044,6 +1063,7 @@ export default {
                     address: '上海市普陀区金沙江路 1518 弄'
                 }
             ],
+            dialogTableVisible: false,
             leftTableDialog: false,
             rightTableDialog: false,
             leftColumns: leftColumns,
@@ -1068,6 +1088,13 @@ export default {
         handleDelete(index, date) {
             console.log(date)
             this.tableData2.splice(index, 1)
+        },
+        handleAddSite() {
+            this.tableData2.push({
+                index: 1,
+                site: '温州网点',
+                num: 20
+            })
         }
     },
     mounted() {
@@ -1076,9 +1103,9 @@ export default {
     },
     // 监听路由变化
     watch: {
-        '$route' (to, from) {
+        '$route' (to) {
             let currentId = to.params.id
-            console.log(currentId, from)
+            console.log(currentId)
         }
     }
 }
@@ -1110,10 +1137,6 @@ export default {
 .au-block-title {
     height: 28px;
     line-height: 28px;
-}
-
-.mt-10 {
-    margin-top: 10px;
 }
 
 .au-add-site-btn {
@@ -1157,7 +1180,16 @@ export default {
     .el-checkbox+.el-checkbox {
         margin-left: 0;
     }
-}    
+}
+
+.au-fast-form {
+    .el-button {
+        border: none;
+        &:hover {
+            border: none;
+        }
+    }
+}
 
 .w-116 {
     .el-form-item__label {
@@ -1177,6 +1209,10 @@ export default {
 
 .ml-10 {
     margin-left: 10px;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }
 
 .h-100 {
