@@ -76,100 +76,12 @@
                     </template>
                 </el-table-column>
                 <el-table-column
-                    v-if="choosenColumns.indexOf('合同号') > -1"
-                    prop="contractId"
-                    label="合同号"
-                    width="120">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('发车日期') > -1"
-                    prop="address"
-                    label="发车日期">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('发车状态') > -1"
-                    prop="address"
-                    label="发车状态">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('发车网点') > -1"
-                    prop="address"
-                    label="发车网点">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('卸货网点') > -1"
-                    prop="address"
-                    label="卸货网点">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('车牌号') > -1"
-                    prop="address"
-                    label="车牌号">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('联系方式') > -1"
-                    prop="address"
-                    label="联系方式">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('调度员') > -1"
-                    prop="address"
-                    label="调度员">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('总件数') > -1"
-                    prop="address"
-                    label="总件数">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('总重量（公斤）') > -1"
-                    prop="address"
-                    label="总重量（公斤）">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
-                    v-if="choosenColumns.indexOf('总体积（立方）') > -1"
-                    prop="address"
-                    label="总体积（立方）">
+                    v-for="item in tableColumns"
+                    v-if="choosenColumns.indexOf(item.label) > -1"
+                    :key="item.prop"
+                    :prop="item.prop"
+                    :label="item.label"
+                    :width="item.width">
                     <template slot-scope="scope">
                         <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
                         <span v-else>{{ scope.row[scope.column.property] }}</span>
@@ -193,19 +105,53 @@
 </template>
 
 <script>
-const columns = [
-    "合同号",
-    "发车日期",
-    "发车状态",
-    "发车网点",
-    "卸货网点",
-    "车牌号",
-    "联系方式",
-    "调度员",
-    "总件数",
-    "总重量（公斤）",
-    "总体积（立方）"
+const tableColumns = [
+    {
+        label: "合同号",
+        prop: 'contractId'
+    },
+    {
+        label: "发车日期",
+        prop: 'startDate'
+    },
+    {
+        label: "发车状态",
+        prop: 'prop1'
+    },
+    {
+        label: "发车网点",
+        prop: 'prop2'
+    },
+    {
+        label: "卸货网点",
+        prop: 'prop3'
+    },
+    {
+        label: "车牌号",
+        prop: 'prop4'
+    },
+    {
+        label: "联系方式",
+        prop: 'prop5'
+    },
+    {
+        label: "调度员",
+        prop: 'prop6'
+    },
+    {
+        label: "总件数",
+        prop: 'prop7'
+    },
+    {
+        label: "总重量（公斤）",
+        prop: 'prop8'
+    },
+    {
+        label: "总体积（立方）",
+        prop: 'prop9'
+    }
 ]
+
 export default {
     data () {
         return {
@@ -220,16 +166,17 @@ export default {
             tableData: [{
                 index: '1',
                 contractId: '18004001',
-                address: '上海市 1518 弄'
+                startDate: '2018-7-19'
             }, {
-                index: '1',
-                contractId: '18004001',
-                address: '上海市 1518 弄'
+                index: '2',
+                contractId: '18004002',
+                startDate: '2018-7-20'
             }],
             dialogChooseColumnVisible: false,
-            form: {},
-            columns: columns,
-            choosenColumns: [...columns],
+            // 列表表头数据
+            tableColumns: tableColumns,
+            columns: tableColumns.map(column => column.label),
+            choosenColumns: [...tableColumns.map(column => column.label)],
             openColumnSearch: false,
             columnSearch: {}
         }
@@ -243,7 +190,7 @@ export default {
             let id = row.contractId
             this.$router.push({ name: 'arrivalUnload', params: { id }})
         },
-        // 列查询
+        // 点击列查询按钮
         toggleColumnSearch() {
             if (this.openColumnSearch) {
                 if (this.tableData[0].isColumnSearch) {
@@ -260,6 +207,7 @@ export default {
                 }
             }
         },
+        // 进行列查询
         handleColumnSearch() {
             console.log(this.columnSearch)
             this.toggleColumnSearch()
