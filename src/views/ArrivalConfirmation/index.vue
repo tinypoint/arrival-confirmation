@@ -18,9 +18,9 @@
         <el-main class="ac-main flex-1 flex-cloumn pd-10">
             <!-- tab按钮 -->
             <el-row class="bottom-line mt-10">
-                <el-button size="medium">全部</el-button>
-                <el-button size="medium">在途</el-button>
-                <el-button size="medium">到达</el-button>
+                <el-button size="medium" @click="handleChangeTab('0')">全部</el-button>
+                <el-button size="medium" @click="handleChangeTab('1')">在途</el-button>
+                <el-button size="medium" @click="handleChangeTab('2')">到达</el-button>
             </el-row>
             <!-- 表单筛选栏 -->
             <el-form :inline="true" :model="formFilter" class="form-wrapper" size="mini">
@@ -156,6 +156,7 @@ export default {
     data () {
         return {
             printOption: '',
+            currentTab: 0,
             formFilter: {
                 contractId: '',
                 carStatus: '',
@@ -172,6 +173,7 @@ export default {
                 contractId: '18004002',
                 startDate: '2018-7-20'
             }],
+            // 列选择dialog开关
             dialogChooseColumnVisible: false,
             // 列表表头数据
             tableColumns: tableColumns,
@@ -181,6 +183,10 @@ export default {
         }
     },
     methods: {
+        handleChangeTab(tabIndex) {
+            this.currentTab = tabIndex
+            // do something
+        },
         handleClickSearch() {
             console.log(this.formFilter)
         },
