@@ -240,7 +240,7 @@ export default {
         },
         // 点击列表某一行时触发
         handleClickRow(row) {
-            let id = row.id
+            let id = row.contractId
             this.$router.push({ name: 'arrivalUnload', params: { id }})
         },
         // 列查询
@@ -262,7 +262,7 @@ export default {
         },
         handleColumnSearch() {
             console.log(this.columnSearch)
-            this.columnSearch = {}
+            this.toggleColumnSearch()
         }
     }
 }
