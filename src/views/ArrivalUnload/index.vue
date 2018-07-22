@@ -23,7 +23,7 @@
                 <el-button @click="handleChangeTab('2')" size="medium">添加订单</el-button>
             </el-row>
             <el-row class="flex-1" v-if="currentTab==='1'">
-                <el-form label-position="left" label-width="96px" size="small" :inline="true" class="au-form-wrapper">
+                <el-form v-model="form" label-position="left" label-width="96px" size="small" :inline="true" class="au-form-wrapper">
                     <el-row>
                         <el-form-item label="合同编号：">
                             <el-input disabled class="au-form-control" v-model="form.name"></el-input>
@@ -126,7 +126,7 @@
                     </el-row>
                 </el-form>
             </el-row>
-            <el-row :gutter="10" class="mt-10 flex-1" v-if="currentTab==='2'">
+            <el-row :gutter="10" class="flex-1" v-if="currentTab==='2'">
                 <el-col class="overflow-x-auto h-100" :span="12">
                     <el-table
                         size="small"
@@ -146,235 +146,293 @@
                             width="60">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('运单号') > -1"
                             label="运单号"
                             prop="id"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('到站') > -1"
                             label="到站"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('目的网点') > -1"
                             label="目的网点"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货单位') > -1"
                             label="发货单位"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('品名') > -1"
                             label="品名"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('件数') > -1"
                             label="件数"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('重量（公斤）') > -1"
                             label="重量（公斤）"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('体积（立方）') > -1"
                             label="体积（立方）"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('应收合计') > -1"
                             label="应收合计"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('托运商单号') > -1"
                             label="托运商单号"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('开单日期') > -1"
                             label="开单日期"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('运单状态') > -1"
                             label="运单状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发站') > -1"
                             label="发站"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货网点') > -1"
                             label="发货网点"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('运输方式') > -1"
                             label="运输方式"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货人') > -1"
                             label="发货人"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货人电话') > -1"
                             label="发货人电话"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货地址') > -1"
                             label="发货地址"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('交接方式') > -1"
                             label="交接方式"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货单位') > -1"
                             label="收货单位"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货人') > -1"
                             label="收货人"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货人电话') > -1"
                             label="收货人电话"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货地址') > -1"
                             label="收货地址"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('提货费') > -1"
                             label="提货费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('运费') > -1"
                             label="运费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('送货费') > -1"
                             label="送货费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('装卸费') > -1"
                             label="装卸费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('声明价值') > -1"
                             label="声明价值"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('保价费') > -1"
                             label="保价费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('包装费') > -1"
                             label="包装费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('仓储费') > -1"
                             label="仓储费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('其他费用') > -1"
                             label="其他费用"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('预付进仓费') > -1"
                             label="预付进仓费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('实付进仓费') > -1"
                             label="实付进仓费"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('结算状态') > -1"
                             label="结算状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('回扣状态') > -1"
                             label="回扣状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('回扣') > -1"
                             label="回扣"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('应结算金额（应收合计-回扣）') > -1"
                             label="应结算金额（应收合计-回扣）"
                             min-width="200">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('付款方式') > -1"
                             label="付款方式"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('现付状态') > -1"
                             label="现付状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('现付') > -1"
                             label="现付"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('到付状态') > -1"
                             label="到付状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('到付') > -1"
                             label="到付"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货月结状态') > -1"
                             label="发货月结状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('发货月结') > -1"
                             label="发货月结"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货月结状态') > -1"
                             label="收货月结状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('收货月结') > -1"
                             label="收货月结"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('欠付状态') > -1"
                             label="欠付状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('欠付') > -1"
                             label="欠付"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('回单付状态') > -1"
                             label="回单付状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('回单付') > -1"
                             label="回单付"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('货到打卡状态') > -1"
                             label="货到打卡状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('货到打卡') > -1"
                             label="货到打卡"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('贷款扣状态') > -1"
                             label="贷款扣状态"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('贷款扣') > -1"
                             label="贷款扣"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('制单人') > -1"
                             label="制单人"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('回单份数') > -1"
                             label="回单份数"
                             min-width="100">
                         </el-table-column>
                         <el-table-column
+                            v-if="leftChoosenColumns.indexOf('备注') > -1"
                             label="备注"
                             min-width="100">
                         </el-table-column>
@@ -436,231 +494,288 @@
                                 width="60">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('运单号') > -1"
                                 label="运单号"
                                 prop="id"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('托运商单号') > -1"
                                 label="托运商单号"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('开单日期') > -1"
                                 label="开单日期"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('运单状态') > -1"
                                 label="运单状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发站') > -1"
                                 label="发站"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('到站') > -1"
                                 label="到站"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货网点') > -1"
                                 label="发货网点"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('目的网点') > -1"
                                 label="目的网点"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('运输方式') > -1"
                                 label="运输方式"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货单位') > -1"
                                 label="发货单位"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货人') > -1"
                                 label="发货人"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货人电话') > -1"
                                 label="发货人电话"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货地址') > -1"
                                 label="发货地址"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('交接方式') > -1"
                                 label="交接方式"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货单位') > -1"
                                 label="收货单位"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货人') > -1"
                                 label="收货人"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货人电话') > -1"
                                 label="收货人电话"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货地址') > -1"
                                 label="收货地址"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('品名') > -1"
                                 label="品名"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('件数') > -1"
                                 label="件数"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('重量（公斤）') > -1"
                                 label="重量（公斤）"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('体积（立方）') > -1"
                                 label="体积（立方）"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('提货费') > -1"
                                 label="提货费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('运费') > -1"
                                 label="运费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('送货费') > -1"
                                 label="送货费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('装卸费') > -1"
                                 label="装卸费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('声明价值') > -1"
                                 label="声明价值"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('保价费') > -1"
                                 label="保价费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('包装费') > -1"
                                 label="包装费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('仓储费') > -1"
                                 label="仓储费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('其他费用') > -1"
                                 label="其他费用"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('预付进仓费') > -1"
                                 label="预付进仓费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('实付进仓费') > -1"
                                 label="实付进仓费"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('结算状态') > -1"
                                 label="结算状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('回扣状态') > -1"
                                 label="回扣状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('回扣') > -1"
                                 label="回扣"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('应结算金额（应收合计-回扣）') > -1"
                                 label="应结算金额（应收合计-回扣）"
                                 min-width="200">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('付款方式') > -1"
                                 label="付款方式"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('现付状态') > -1"
                                 label="现付状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('现付') > -1"
                                 label="现付"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('到付状态') > -1"
                                 label="到付状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('到付') > -1"
                                 label="到付"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货月结状态') > -1"
                                 label="发货月结状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('发货月结') > -1"
                                 label="发货月结"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货月结状态') > -1"
                                 label="收货月结状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('收货月结') > -1"
                                 label="收货月结"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('欠付状态') > -1"
                                 label="欠付状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('欠付') > -1"
                                 label="欠付"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('回单付状态') > -1"
                                 label="回单付状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('回单付') > -1"
                                 label="回单付"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('货到打卡状态') > -1"
                                 label="货到打卡状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('货到打卡') > -1"
                                 label="货到打卡"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('贷款扣状态') > -1"
                                 label="贷款扣状态"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('贷款扣') > -1"
                                 label="贷款扣"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('制单人') > -1"
                                 label="制单人"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('回单份数') > -1"
                                 label="回单份数"
                                 min-width="100">
                             </el-table-column>
                             <el-table-column
+                                v-if="rightChoosenColumns.indexOf('备注') > -1"
                                 label="备注"
                                 min-width="100">
                             </el-table-column>
@@ -672,12 +787,12 @@
         <el-footer v-if="currentTab==='2'" class="au-footer">
             <el-row>
                 <el-col :span="12">
-                    <el-button type="info" size="mini">列选择</el-button>
+                    <el-button @click="leftTableDialog=true" type="info" size="mini">列选择</el-button>
                     <el-button type="info" size="mini">列搜索</el-button>
                     <el-button type="info" size="mini">导出</el-button>
                 </el-col>
                 <el-col :span="12">
-                    <el-button type="info" size="mini">列选择</el-button>
+                    <el-button @click="rightTableDialog=true" type="info" size="mini">列选择</el-button>
                     <el-button type="info" size="mini">列搜索</el-button>
                     <el-button type="info" size="mini">导出</el-button>
                 </el-col>
@@ -753,11 +868,139 @@
                 <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="列选择" :visible.sync="leftTableDialog">
+            <el-checkbox-group class="au-checkbox-group flex-cloumn" v-model="leftChoosenColumns">
+                <el-checkbox v-for="column in leftColumns" :label="column" :key="column">{{column}}</el-checkbox>
+            </el-checkbox-group>
+        </el-dialog>
+        <el-dialog title="列选择" :visible.sync="rightTableDialog">
+            <el-checkbox-group class="au-checkbox-group flex-cloumn" v-model="rightChoosenColumns">
+                <el-checkbox v-for="column in rightColumns" :label="column" :key="column">{{column}}</el-checkbox>
+            </el-checkbox-group>
+        </el-dialog>
     </el-container>
 </template>
 
 <script>
-
+const leftColumns = [
+    "运单号",
+    "到站",
+    "目的网点",
+    "发货单位",
+    "品名",
+    "件数",
+    "重量（公斤）",
+    "体积（立方）",
+    "应收合计",
+    "托运商单号",
+    "开单日期",
+    "运单状态",
+    "发站",
+    "发货网点",
+    "运输方式",
+    "发货人",
+    "发货人电话",
+    "发货地址",
+    "交接方式",
+    "收货单位",
+    "收货人",
+    "收货人电话",   
+    "收货地址",
+    "提货费",
+    "运费",
+    "送货费",
+    "装卸费",
+    "声明价值",
+    "保价费",
+    "包装费",
+    "仓储费",
+    "其他费用",
+    "预付进仓费",
+    "实付进仓费",
+    "结算状态",
+    "回扣状态",
+    "回扣",
+    "应结算金额（应收合计-回扣）",
+    "付款方式",
+    "现付状态",
+    "现付",
+    "到付状态",
+    "到付",
+    "发货月结状态",
+    "发货月结",
+    "收货月结状态",
+    "收货月结",
+    "欠付状态",
+    "欠付",
+    "回单付状态",
+    "回单付",
+    "货到打卡状态",
+    "货到打卡",
+    "贷款扣状态",
+    "贷款扣",
+    "制单人",
+    "回单份数",
+    "备注"
+]
+const rightColumns = [
+    "运单号",                          
+    "托运商单号",
+    "开单日期",
+    "运单状态",
+    "发站",
+    "到站",
+    "发货网点",
+    "目的网点",
+    "运输方式",
+    "发货单位",
+    "发货人",
+    "发货人电话",
+    "发货地址",
+    "交接方式",
+    "收货单位",
+    "收货人",
+    "收货人电话",
+    "收货地址",
+    "品名",
+    "件数",
+    "重量（公斤）",
+    "体积（立方）",
+    "提货费",
+    "运费",
+    "送货费",
+    "装卸费",
+    "声明价值",
+    "保价费",
+    "包装费",
+    "仓储费",
+    "其他费用",
+    "预付进仓费",
+    "实付进仓费",
+    "结算状态",
+    "回扣状态",
+    "回扣",
+    "应结算金额（应收合计-回扣）",
+    "付款方式",
+    "现付状态",
+    "现付",
+    "到付状态",
+    "到付",
+    "发货月结状态",
+    "发货月结",
+    "收货月结状态",
+    "收货月结",
+    "欠付状态",
+    "欠付",
+    "回单付状态",
+    "回单付",
+    "货到打卡状态",
+    "货到打卡",
+    "贷款扣状态",
+    "贷款扣",
+    "制单人",
+    "回单份数",
+    "备注"
+]
 export default {
     data () {
         return {
@@ -771,59 +1014,10 @@ export default {
                 {
                     index: 1,
                     id: 18040001
-                },
-                {
-                    index: 1,
-                    id: 18040001
-                },
-                {
-                    index: 1,
-                    id: 18040001
-                },
-                {
-                    index: 1,
-                    id: 18040001
-                },
-                {
-                    index: 1,
-                    id: 18040001
-                },{
-                    index: 1,
-                    id: 18040001
-                },{
-                    index: 1,
-                    id: 18040001
-                },{
-                    index: 1,
-                    id: 18040001
                 }
             ],
             tableData2: [
                 {
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
-                    index: 1,
-                    site: '温州网点',
-                    num: 20
-                },{
                     index: 1,
                     site: '温州网点',
                     num: 20
@@ -849,7 +1043,13 @@ export default {
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
                 }
-            ]
+            ],
+            leftTableDialog: false,
+            rightTableDialog: false,
+            leftColumns: leftColumns,
+            rightColumns: rightColumns,
+            leftChoosenColumns: [...leftColumns],
+            rightChoosenColumns: [...rightColumns]
         }
     },
     methods: {
@@ -946,6 +1146,14 @@ export default {
         width: 145px;
     }
 }
+
+.au-checkbox-group {
+    max-height: 300px;
+    overflow-y: auto;
+    .el-checkbox+.el-checkbox {
+        margin-left: 0;
+    }
+}    
 
 .w-116 {
     .el-form-item__label {

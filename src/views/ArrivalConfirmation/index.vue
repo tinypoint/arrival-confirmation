@@ -67,69 +67,97 @@
                     width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="id"
+                    prop="index"
                     label="序号"
                     width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="name"
+                    prop="contractId"
+                    v-if="choosenColumns.indexOf('合同号') > -1"
                     label="合同号"
                     width="120">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('发车日期') > -1"
                     label="发车日期">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('发车状态') > -1"
                     label="发车状态">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('发车网点') > -1"
                     label="发车网点">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('卸货网点') > -1"
                     label="卸货网点">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('车牌号') > -1"
                     label="车牌号">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('联系方式') > -1"
                     label="联系方式">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('调度员') > -1"
                     label="调度员">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('总件数') > -1"
                     label="总件数">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('总重量（公斤）') > -1"
                     label="总重量（公斤）">
                 </el-table-column>
                 <el-table-column
                     prop="address"
+                    v-if="choosenColumns.indexOf('总体积（立方）') > -1"
                     label="总体积（立方）">
                 </el-table-column>
             </el-table>
         </el-main>
         <el-footer class="ac-footer">
             <el-col :span="24">
-                <el-button type="info" size="mini">列选择</el-button>
+                <el-button @click="dialogChooseColumnVisible = true" type="info" size="mini">列选择</el-button>
                 <el-button type="info" size="mini">列搜索</el-button>
                 <el-button type="info" size="mini">导出</el-button>
             </el-col>
         </el-footer>
+        <el-dialog title="列选择" :visible.sync="dialogChooseColumnVisible">
+            <el-checkbox-group class="ac-checkbox-group flex-cloumn" v-model="choosenColumns">
+                <el-checkbox v-for="column in columns" :label="column" :key="column">{{column}}</el-checkbox>
+            </el-checkbox-group>
+        </el-dialog>
     </el-container>
 </template>
 
 <script>
-
+const columns = [
+    "合同号",
+    "发车日期",
+    "发车状态",
+    "发车网点",
+    "卸货网点",
+    "车牌号",
+    "联系方式",
+    "调度员",
+    "总件数",
+    "总重量（公斤）",
+    "总体积（立方）"
+]
 export default {
     data () {
         return {
@@ -142,42 +170,14 @@ export default {
                 site: ''
             },
             tableData: [{
-                id: '1',
-                name: '王小虎',
+                index: '1',
+                contractId: '18004001',
                 address: '上海市 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1516 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1518 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1517 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1519 弄'
-            }, {
-                id: '1',
-                name: '王小虎',
-                address: '上海市 1516 弄'
-            }]
+            }],
+            dialogChooseColumnVisible: false,
+            form: {},
+            columns: columns,
+            choosenColumns: [...columns]
         }
     },
     methods: {
@@ -214,6 +214,14 @@ export default {
 
 .ac-main .el-button+.el-button {
     margin-left: 5px;
+}
+
+.ac-checkbox-group {
+    max-height: 300px;
+    overflow-y: auto;
+    .el-checkbox+.el-checkbox {
+        margin-left: 0;
+    }
 }
 /* css global util */
 .flex-1 {
