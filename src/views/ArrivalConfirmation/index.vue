@@ -98,7 +98,7 @@
         </el-footer>
         <el-dialog :visible.sync="dialogChooseColumnVisible" title="列选择">
             <el-checkbox-group v-model="choosenColumns" class="ac-checkbox-group flex-cloumn">
-                <el-checkbox v-for="column in columns" :label="column" :key="column">{{column}}</el-checkbox>
+                <el-checkbox v-for="column in tableColumns" :label="column.label" :key="column.label">{{column.label}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
     </el-container>
@@ -175,7 +175,6 @@ export default {
             dialogChooseColumnVisible: false,
             // 列表表头数据
             tableColumns: tableColumns,
-            columns: tableColumns.map(column => column.label),
             choosenColumns: [...tableColumns.map(column => column.label)],
             openColumnSearch: false,
             columnSearch: {}
