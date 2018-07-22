@@ -166,580 +166,13 @@
                             </template>
                         </el-table-column>
                         <el-table-column
-                            v-if="leftChoosenColumns.indexOf('运单号') > -1"
-                            label="运单号"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('到站') > -1"
-                            label="到站"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('目的网点') > -1"
-                            label="目的网点"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货单位') > -1"
-                            label="发货单位"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('品名') > -1"
-                            label="品名"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('件数') > -1"
-                            label="件数"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('重量（公斤）') > -1"
-                            label="重量（公斤）"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('体积（立方）') > -1"
-                            label="体积（立方）"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('应收合计') > -1"
-                            label="应收合计"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('托运商单号') > -1"
-                            label="托运商单号"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('开单日期') > -1"
-                            label="开单日期"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('运单状态') > -1"
-                            label="运单状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发站') > -1"
-                            label="发站"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货网点') > -1"
-                            label="发货网点"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('运输方式') > -1"
-                            label="运输方式"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货人') > -1"
-                            label="发货人"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货人电话') > -1"
-                            label="发货人电话"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货地址') > -1"
-                            label="发货地址"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('交接方式') > -1"
-                            label="交接方式"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货单位') > -1"
-                            label="收货单位"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货人') > -1"
-                            label="收货人"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货人电话') > -1"
-                            label="收货人电话"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货地址') > -1"
-                            label="收货地址"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('提货费') > -1"
-                            label="提货费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('运费') > -1"
-                            label="运费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('送货费') > -1"
-                            label="送货费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('装卸费') > -1"
-                            label="装卸费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('声明价值') > -1"
-                            label="声明价值"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('保价费') > -1"
-                            label="保价费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('包装费') > -1"
-                            label="包装费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('仓储费') > -1"
-                            label="仓储费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('其他费用') > -1"
-                            label="其他费用"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('预付进仓费') > -1"
-                            label="预付进仓费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('实付进仓费') > -1"
-                            label="实付进仓费"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('结算状态') > -1"
-                            label="结算状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('回扣状态') > -1"
-                            label="回扣状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('回扣') > -1"
-                            label="回扣"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('应结算金额（应收合计-回扣）') > -1"
-                            label="应结算金额（应收合计-回扣）"
-                            prop="id"
-                            min-width="200">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('付款方式') > -1"
-                            label="付款方式"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('现付状态') > -1"
-                            label="现付状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('现付') > -1"
-                            label="现付"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('到付状态') > -1"
-                            label="到付状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('到付') > -1"
-                            label="到付"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货月结状态') > -1"
-                            label="发货月结状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('发货月结') > -1"
-                            label="发货月结"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货月结状态') > -1"
-                            label="收货月结状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('收货月结') > -1"
-                            label="收货月结"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('欠付状态') > -1"
-                            label="欠付状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('欠付') > -1"
-                            label="欠付"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('回单付状态') > -1"
-                            label="回单付状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('回单付') > -1"
-                            label="回单付"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('货到打卡状态') > -1"
-                            label="货到打卡状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('货到打卡') > -1"
-                            label="货到打卡"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('贷款扣状态') > -1"
-                            label="贷款扣状态"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('贷款扣') > -1"
-                            label="贷款扣"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('制单人') > -1"
-                            label="制单人"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('回单份数') > -1"
-                            label="回单份数"
-                            prop="id"
-                            min-width="100">
-                            <template slot-scope="scope">
-                                <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
-                                <span v-else>{{ scope.row[scope.column.property] }}</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column
-                            v-if="leftChoosenColumns.indexOf('备注') > -1"
-                            label="备注"
-                            prop="id"
-                            min-width="100">
+                            v-for="item in leftTableColumns"
+                            v-if="leftChoosenColumns.indexOf(item.label) > -1"
+                            :key="item.prop"
+                            :prop="item.prop"
+                            :label="item.label"
+                            :width="item.width"
+                            :min-width="item['min-width'] || 100">
                             <template slot-scope="scope">
                                 <el-input v-if="scope.$index === 0 && openLeftColumnSearch" v-model="leftColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleLeftColumnSearch"></el-input>
                                 <span v-else>{{ scope.row[scope.column.property] }}</span>
@@ -807,570 +240,13 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                v-if="rightChoosenColumns.indexOf('运单号') > -1"
-                                label="运单号"
-                                prop="id"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('托运商单号') > -1"
-                                label="托运商单号"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('开单日期') > -1"
-                                label="开单日期"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('运单状态') > -1"
-                                label="运单状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发站') > -1"
-                                label="发站"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('到站') > -1"
-                                label="到站"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货网点') > -1"
-                                label="发货网点"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('目的网点') > -1"
-                                label="目的网点"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('运输方式') > -1"
-                                label="运输方式"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货单位') > -1"
-                                label="发货单位"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货人') > -1"
-                                label="发货人"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货人电话') > -1"
-                                label="发货人电话"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货地址') > -1"
-                                label="发货地址"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('交接方式') > -1"
-                                label="交接方式"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货单位') > -1"
-                                label="收货单位"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货人') > -1"
-                                label="收货人"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货人电话') > -1"
-                                label="收货人电话"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货地址') > -1"
-                                label="收货地址"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('品名') > -1"
-                                label="品名"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('件数') > -1"
-                                label="件数"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('重量（公斤）') > -1"
-                                label="重量（公斤）"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('体积（立方）') > -1"
-                                label="体积（立方）"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('提货费') > -1"
-                                label="提货费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('运费') > -1"
-                                label="运费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('送货费') > -1"
-                                label="送货费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('装卸费') > -1"
-                                label="装卸费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('声明价值') > -1"
-                                label="声明价值"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('保价费') > -1"
-                                label="保价费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('包装费') > -1"
-                                label="包装费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('仓储费') > -1"
-                                label="仓储费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('其他费用') > -1"
-                                label="其他费用"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('预付进仓费') > -1"
-                                label="预付进仓费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('实付进仓费') > -1"
-                                label="实付进仓费"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('结算状态') > -1"
-                                label="结算状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('回扣状态') > -1"
-                                label="回扣状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('回扣') > -1"
-                                label="回扣"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('应结算金额（应收合计-回扣）') > -1"
-                                label="应结算金额（应收合计-回扣）"
-                                prop="index"
-                                min-width="200">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('付款方式') > -1"
-                                label="付款方式"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('现付状态') > -1"
-                                label="现付状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('现付') > -1"
-                                label="现付"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('到付状态') > -1"
-                                label="到付状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('到付') > -1"
-                                label="到付"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货月结状态') > -1"
-                                label="发货月结状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('发货月结') > -1"
-                                label="发货月结"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货月结状态') > -1"
-                                label="收货月结状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('收货月结') > -1"
-                                label="收货月结"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('欠付状态') > -1"
-                                label="欠付状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('欠付') > -1"
-                                label="欠付"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('回单付状态') > -1"
-                                label="回单付状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('回单付') > -1"
-                                label="回单付"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('货到打卡状态') > -1"
-                                label="货到打卡状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('货到打卡') > -1"
-                                label="货到打卡"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('贷款扣状态') > -1"
-                                label="贷款扣状态"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('贷款扣') > -1"
-                                label="贷款扣"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('制单人') > -1"
-                                label="制单人"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('回单份数') > -1"
-                                label="回单份数"
-                                prop="index"
-                                min-width="100">
-                                <template slot-scope="scope">
-                                    <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
-                                    <span v-else>{{ scope.row[scope.column.property] }}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column
-                                v-if="rightChoosenColumns.indexOf('备注') > -1"
-                                label="备注"
-                                prop="index"
-                                min-width="100">
+                                v-for="item in rightTableColumns"
+                                v-if="rightChoosenColumns.indexOf(item.label) > -1"
+                                :key="item.prop"
+                                :prop="item.prop"
+                                :label="item.label"
+                                :width="item.width"
+                                :min-width="item['min-width'] || 100">
                                 <template slot-scope="scope">
                                     <el-input v-if="scope.$index === 0 && openRightColumnSearch" v-model="rightColumnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleRightColumnSearch"></el-input>
                                     <span v-else>{{ scope.row[scope.column.property] }}</span>
@@ -1467,12 +343,12 @@
         </el-dialog>
         <el-dialog :visible.sync="leftTableDialog" title="列选择">
             <el-checkbox-group v-model="leftChoosenColumns" class="au-checkbox-group flex-cloumn">
-                <el-checkbox v-for="column in leftColumns" :label="column" :key="column">{{column}}</el-checkbox>
+                <el-checkbox v-for="column in leftTableColumns" :label="column.label" :key="column.label">{{column.label}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
         <el-dialog :visible.sync="rightTableDialog" title="列选择">
             <el-checkbox-group v-model="rightChoosenColumns" class="au-checkbox-group flex-cloumn">
-                <el-checkbox v-for="column in rightColumns" :label="column" :key="column">{{column}}</el-checkbox>
+                <el-checkbox v-for="column in rightTableColumns" :label="column.label" :key="column.label">{{column.label}}</el-checkbox>
             </el-checkbox-group>
         </el-dialog>
     </el-container>
@@ -1480,123 +356,470 @@
 
 <script>
 const leftColumns = [
-    "运单号",
-    "到站",
-    "目的网点",
-    "发货单位",
-    "品名",
-    "件数",
-    "重量（公斤）",
-    "体积（立方）",
-    "应收合计",
-    "托运商单号",
-    "开单日期",
-    "运单状态",
-    "发站",
-    "发货网点",
-    "运输方式",
-    "发货人",
-    "发货人电话",
-    "发货地址",
-    "交接方式",
-    "收货单位",
-    "收货人",
-    "收货人电话",   
-    "收货地址",
-    "提货费",
-    "运费",
-    "送货费",
-    "装卸费",
-    "声明价值",
-    "保价费",
-    "包装费",
-    "仓储费",
-    "其他费用",
-    "预付进仓费",
-    "实付进仓费",
-    "结算状态",
-    "回扣状态",
-    "回扣",
-    "应结算金额（应收合计-回扣）",
-    "付款方式",
-    "现付状态",
-    "现付",
-    "到付状态",
-    "到付",
-    "发货月结状态",
-    "发货月结",
-    "收货月结状态",
-    "收货月结",
-    "欠付状态",
-    "欠付",
-    "回单付状态",
-    "回单付",
-    "货到打卡状态",
-    "货到打卡",
-    "贷款扣状态",
-    "贷款扣",
-    "制单人",
-    "回单份数",
-    "备注"
+    {    
+        label: "运单号",
+        prop: 'prop1'
+    },
+    {    
+        label: "到站",
+        prop: 'prop2'
+    },
+    {    
+        label: "目的网点",
+        prop: 'prop3'
+    },
+    {    
+        label: "发货单位",
+        prop: 'prop4'
+    },
+    {    
+        label: "品名",
+        prop: 'prop5'
+    },
+    {    
+        label: "件数",
+        prop: 'prop6'
+    },
+    {    
+        label: "重量（公斤）",
+        prop: 'prop7'
+    },
+    {    
+        label: "体积（立方）",
+        prop: 'prop8'
+    },
+    {    
+        label: "应收合计",
+        prop: 'prop9'
+    },
+    {    
+        label: "托运商单号",
+        prop: 'prop10'
+    },
+    {    
+        label: "开单日期",
+        prop: 'prop11'
+    },
+    {    
+        label: "运单状态",
+        prop: 'prop12'
+    },
+    {    
+        label: "发站",
+        prop: 'prop13'
+    },
+    {    
+        label: "发货网点",
+        prop: 'prop14'
+    },
+    {    
+        label: "运输方式",
+        prop: 'prop15'
+    },
+    {    
+        label: "发货人",
+        prop: 'prop16'
+    },
+    {    
+        label: "发货人电话",
+        prop: 'prop17'
+    },
+    {    
+        label: "发货地址",
+        prop: 'prop18'
+    },
+    {    
+        label: "交接方式",
+        prop: 'prop19'
+    },
+    {    
+        label: "收货单位",
+        prop: 'prop20'
+    },
+    {    
+        label: "收货人",
+        prop: 'prop21'
+    },
+    {    
+        label: "收货人电话",
+        prop: 'prop22'
+    },
+    {    
+        label: "收货地址",
+        prop: 'prop23'
+    },
+    {    
+        label: "提货费",
+        prop: 'prop24'
+    },
+    {    
+        label: "运费",
+        prop: 'prop25'
+    },
+    {    
+        label: "送货费",
+        prop: 'prop26'
+    },
+    {    
+        label: "装卸费",
+        prop: 'prop27'
+    },
+    {    
+        label: "声明价值",
+        prop: 'prop28'
+    },
+    {    
+        label: "保价费",
+        prop: 'prop29'
+    },
+    {    
+        label: "包装费",
+        prop: 'prop30'
+    },
+    {    
+        label: "仓储费",
+        prop: 'prop31'
+    },
+    {    
+        label: "其他费用",
+        prop: 'prop32'
+    },
+    {    
+        label: "预付进仓费",
+        prop: 'prop33'
+    },
+    {    
+        label: "实付进仓费",
+        prop: 'prop34'
+    },
+    {    
+        label: "结算状态",
+        prop: 'prop35'
+    },
+    {    
+        label: "回扣状态",
+        prop: 'prop36'
+    },
+    {    
+        label: "回扣",
+        prop: 'prop37'
+    },
+    {    
+        label: "应结算金额（应收合计-回扣）",
+        prop: 'prop38',
+        "min-width": 200
+    },
+    {    
+        label: "付款方式",
+        prop: 'prop39'
+    },
+    {    
+        label: "现付状态",
+        prop: 'prop40'
+    },
+    {    
+        label: "现付",
+        prop: 'prop41'
+    },
+    {    
+        label: "到付状态",
+        prop: 'prop42'
+    },
+    {    
+        label: "到付",
+        prop: 'prop43'
+    },
+    {    
+        label: "发货月结状态",
+        prop: 'prop44'
+    },
+    {    
+        label: "发货月结",
+        prop: 'prop45'
+    },
+    {    
+        label: "收货月结状态",
+        prop: 'prop46'
+    },
+    {    
+        label: "收货月结",
+        prop: 'prop47'
+    },
+    {    
+        label: "欠付状态",
+        prop: 'prop48'
+    },
+    {    
+        label: "欠付",
+        prop: 'prop49'
+    },
+    {    
+        label: "回单付状态",
+        prop: 'prop50'
+    },
+    {    
+        label: "回单付",
+        prop: 'prop51'
+    },
+    {    
+        label: "货到打卡状态",
+        prop: 'prop52'
+    },
+    {    
+        label: "货到打卡",
+        prop: 'prop53'
+    },
+    {    
+        label: "贷款扣状态",
+        prop: 'prop54'
+    },
+    {    
+        label: "贷款扣",
+        prop: 'prop55'
+    },
+    {    
+        label: "制单人",
+        prop: 'prop56'
+    },
+    {    
+        label: "回单份数",
+        prop: 'prop57'
+    },
+    {    
+        label:  "备注",
+        prop: 'prop58'
+    }
 ]
 const rightColumns = [
-    "运单号",                          
-    "托运商单号",
-    "开单日期",
-    "运单状态",
-    "发站",
-    "到站",
-    "发货网点",
-    "目的网点",
-    "运输方式",
-    "发货单位",
-    "发货人",
-    "发货人电话",
-    "发货地址",
-    "交接方式",
-    "收货单位",
-    "收货人",
-    "收货人电话",
-    "收货地址",
-    "品名",
-    "件数",
-    "重量（公斤）",
-    "体积（立方）",
-    "提货费",
-    "运费",
-    "送货费",
-    "装卸费",
-    "声明价值",
-    "保价费",
-    "包装费",
-    "仓储费",
-    "其他费用",
-    "预付进仓费",
-    "实付进仓费",
-    "结算状态",
-    "回扣状态",
-    "回扣",
-    "应结算金额（应收合计-回扣）",
-    "付款方式",
-    "现付状态",
-    "现付",
-    "到付状态",
-    "到付",
-    "发货月结状态",
-    "发货月结",
-    "收货月结状态",
-    "收货月结",
-    "欠付状态",
-    "欠付",
-    "回单付状态",
-    "回单付",
-    "货到打卡状态",
-    "货到打卡",
-    "贷款扣状态",
-    "贷款扣",
-    "制单人",
-    "回单份数",
-    "备注"
+    {    
+        label: "运单号",
+        prop: 'prop1'
+    },
+    {    
+        label: "托运商单号",
+        prop: 'prop2'
+    },
+    {    
+        label: "开单日期",
+        prop: 'prop3'
+    },
+    {    
+        label: "运单状态",
+        prop: 'prop4'
+    },
+    {    
+        label: "发站",
+        prop: 'prop5'
+    },
+    {    
+        label: "到站",
+        prop: 'prop6'
+    },
+    {    
+        label: "发货网点",
+        prop: 'prop7'
+    },
+    {    
+        label: "目的网点",
+        prop: 'prop8'
+    },
+    {    
+        label: "运输方式",
+        prop: 'prop9'
+    },
+    {    
+        label: "发货单位",
+        prop: 'prop10'
+    },
+    {    
+        label: "发货人",
+        prop: 'prop11'
+    },
+    {    
+        label: "发货人电话",
+        prop: 'prop12'
+    },
+    {    
+        label: "发货地址",
+        prop: 'prop13'
+    },
+    {    
+        label: "交接方式",
+        prop: 'prop14'
+    },
+    {    
+        label: "收货单位",
+        prop: 'prop15'
+    },
+    {    
+        label: "收货人",
+        prop: 'prop16'
+    },
+    {    
+        label: "收货人电话",
+        prop: 'prop17'
+    },
+    {    
+        label: "收货地址",
+        prop: 'prop18'
+    },
+    {    
+        label: "品名",
+        prop: 'prop19'
+    },
+    {    
+        label: "件数",
+        prop: 'prop20'
+    },
+    {    
+        label: "重量（公斤）",
+        prop: 'prop21'
+    },
+    {    
+        label: "体积（立方）",
+        prop: 'prop22'
+    },
+    {    
+        label: "提货费",
+        prop: 'prop23'
+    },
+    {    
+        label: "运费",
+        prop: 'prop24'
+    },
+    {    
+        label: "送货费",
+        prop: 'prop25'
+    },
+    {    
+        label: "装卸费",
+        prop: 'prop26'
+    },
+    {    
+        label: "声明价值",
+        prop: 'prop27'
+    },
+    {    
+        label: "保价费",
+        prop: 'prop28'
+    },
+    {    
+        label: "包装费",
+        prop: 'prop29'
+    },
+    {    
+        label: "仓储费",
+        prop: 'prop30'
+    },
+    {    
+        label: "其他费用",
+        prop: 'prop31'
+    },
+    {    
+        label: "预付进仓费",
+        prop: 'prop32'
+    },
+    {    
+        label: "实付进仓费",
+        prop: 'prop33'
+    },
+    {    
+        label: "结算状态",
+        prop: 'prop34'
+    },
+    {    
+        label: "回扣状态",
+        prop: 'prop35'
+    },
+    {    
+        label: "回扣",
+        prop: 'prop36'
+    },
+    {    
+        label: "应结算金额（应收合计-回扣）",
+        prop: 'prop37',
+        "min-width": 200
+    },
+    {    
+        label: "付款方式",
+        prop: 'prop38'
+    },
+    {    
+        label: "现付状态",
+        prop: 'prop39'
+    },
+    {    
+        label: "现付",
+        prop: 'prop40'
+    },
+    {    
+        label: "到付状态",
+        prop: 'prop41'
+    },
+    {    
+        label: "到付",
+        prop: 'prop42'
+    },
+    {    
+        label: "发货月结状态",
+        prop: 'prop43'
+    },
+    {    
+        label: "发货月结",
+        prop: 'prop44'
+    },
+    {    
+        label: "收货月结状态",
+        prop: 'prop45'
+    },
+    {    
+        label: "收货月结",
+        prop: 'prop46'
+    },
+    {    
+        label: "欠付状态",
+        prop: 'prop47'
+    },
+    {    
+        label: "欠付",
+        prop: 'prop48'
+    },
+    {    
+        label: "回单付状态",
+        prop: 'prop49'
+    },
+    {    
+        label: "回单付",
+        prop: 'prop50'
+    },
+    {    
+        label: "货到打卡状态",
+        prop: 'prop51'
+    },
+    {    
+        label: "货到打卡",
+        prop: 'prop52'
+    },
+    {    
+        label: "贷款扣状态",
+        prop: 'prop53'
+    },
+    {    
+        label: "贷款扣",
+        prop: 'prop54'
+    },
+    {    
+        label: "制单人",
+        prop: 'prop55'
+    },
+    {    
+        label: "回单份数",
+        prop: 'prop56'
+    },
+    {    
+        label: "备注",
+        prop: 'prop57'
+    }
 ]
 export default {
     data () {
@@ -1610,12 +833,14 @@ export default {
             form: {
 
             },
+            // 左侧列表
             tableData1: [
                 {
                     index: 1,
-                    id: 18040001
+                    prop1: 18040001
                 }
             ],
+            // 网点列表
             tableData2: [
                 {
                     index: 1,
@@ -1627,10 +852,11 @@ export default {
                     num: 20
                 }
             ],
+            // 左侧列表
             tableData3: [
                 {
                     index: 1,
-                    id: 18040001
+                    prop1: 18040001
                 }
             ],
             dialogTableData: [
@@ -1644,13 +870,17 @@ export default {
                     address: '上海市普陀区金沙江路 1518 弄'
                 }
             ],
-            dialogTableVisible: false,
+            // dialog开关
+            dialogTableVisible: true,
             leftTableDialog: false,
             rightTableDialog: false,
-            leftColumns: leftColumns,
-            rightColumns: rightColumns,
-            leftChoosenColumns: [...leftColumns],
-            rightChoosenColumns: [...rightColumns],
+            // 列表表头数据
+            leftTableColumns: leftColumns,
+            rightTableColumns: rightColumns,
+            // 列选择checkbox数据
+            leftChoosenColumns: [...leftColumns.map(item => item.label)],
+            rightChoosenColumns: [...rightColumns.map(item => item.label)],
+            // 列查询相关
             openLeftColumnSearch: false,
             leftColumnSearch: {},
             openRightColumnSearch: false,
