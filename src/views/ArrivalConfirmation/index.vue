@@ -171,7 +171,59 @@ const tableColumns = [
         prop: 'prop9'
     }
 ]
-
+const mockData = [{
+    index: '1',
+    contractId: '18004001',
+    startDate: '2018-7-19',
+    prop1: '已发出',
+    prop2: 'C点',
+    prop3: 'A点',
+    prop4: '沪A123456',
+    prop5: '19250987908',
+    prop6: '李四',
+    prop7: '200',
+    prop8: '20',
+    prop9: '40'
+}, {
+    index: '2',
+    contractId: '18004002',
+    startDate: '2018-7-19',
+    prop1: '已发出',
+    prop2: 'B点',
+    prop3: 'A点',
+    prop4: '沪B123456',
+    prop5: '19279085098',
+    prop6: '张三',
+    prop7: '500',
+    prop8: '20',
+    prop9: '50'
+}, {
+    index: '3',
+    contractId: '18004003',
+    startDate: '2018-7-19',
+    prop1: '未发车',
+    prop2: 'C点',
+    prop3: 'D点',
+    prop4: '沪B123456',
+    prop5: '19250987908',
+    prop6: '张三',
+    prop7: '200',
+    prop8: '20',
+    prop9: '40'
+}, {
+    index: '4',
+    contractId: '18004004',
+    startDate: '2018-7-19',
+    prop1: '未发车',
+    prop2: 'H点',
+    prop3: 'A点',
+    prop4: '沪A123456',
+    prop5: '19279085098',
+    prop6: '李四',
+    prop7: '500',
+    prop8: '20',
+    prop9: '50'
+}]
 export default {
     data () {
         return {
@@ -184,59 +236,7 @@ export default {
                 endDate: '',
                 site: ''
             },
-            tableData: [{
-                index: '1',
-                contractId: '18004001',
-                startDate: '2018-7-19',
-                prop1: '已发出',
-                prop2: 'C点',
-                prop3: 'A点',
-                prop4: '沪A123456',
-                prop5: '19250987908',
-                prop6: '李四',
-                prop7: '200',
-                prop8: '20',
-                prop9: '40'
-            }, {
-                index: '2',
-                contractId: '18004002',
-                startDate: '2018-7-19',
-                prop1: '已发出',
-                prop2: 'B点',
-                prop3: 'A点',
-                prop4: '沪B123456',
-                prop5: '19279085098',
-                prop6: '张三',
-                prop7: '500',
-                prop8: '20',
-                prop9: '50'
-            }, {
-                index: '3',
-                contractId: '18004003',
-                startDate: '2018-7-19',
-                prop1: '未发车',
-                prop2: 'C点',
-                prop3: 'D点',
-                prop4: '沪B123456',
-                prop5: '19250987908',
-                prop6: '张三',
-                prop7: '200',
-                prop8: '20',
-                prop9: '40'
-            }, {
-                index: '4',
-                contractId: '18004004',
-                startDate: '2018-7-19',
-                prop1: '未发车',
-                prop2: 'H点',
-                prop3: 'A点',
-                prop4: '沪A123456',
-                prop5: '19279085098',
-                prop6: '李四',
-                prop7: '500',
-                prop8: '20',
-                prop9: '50'
-            }],
+            tableData: mockData.slice(),
             // 列选择dialog开关
             dialogChooseColumnVisible: false,
             // 列表表头数据
@@ -278,6 +278,20 @@ export default {
         },
         // 进行列查询
         handleColumnSearch() {
+            let values = Object.values(this.columnSearch);
+            let isEmpty = values.every(value => {
+                return typeof value === undefined || value === ''
+            }) || values.length === 0
+
+            if (isEmpty) {
+                this.columnSearch = {}
+                let newData = mockData.slice();
+                newData.unshift({
+                    isColumnSearch: true
+                })
+                this.tableData = newData
+            }
+            
             this.tableData = this.tableData.filter(item => {
                 if (item.isColumnSearch) {
                     return true
