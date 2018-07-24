@@ -67,15 +67,6 @@
                     width="60">
                 </el-table-column>
                 <el-table-column
-                    prop="index"
-                    label="序号"
-                    width="60">
-                    <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
-                        <span v-else>{{ scope.row[scope.column.property] }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column
                     v-for="item in tableColumns"
                     v-if="choosenColumns.indexOf(item.label) > -1"
                     :key="item.prop"
@@ -83,7 +74,18 @@
                     :label="item.label"
                     :width="item.width">
                     <template slot-scope="scope">
-                        <el-input v-if="scope.$index === 0 && openColumnSearch" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
+                        <div v-if="scope.$index === 0 && openColumnSearch">
+                            <el-date-picker v-if="item.type==='date'" v-model="columnSearch[scope.column.property]" size="mini" type="date" style="width:100%;" @change="handleColumnSearch"></el-date-picker>
+                            <el-select v-else-if="item.type==='select'" v-model="columnSearch[scope.column.property]" size="mini" placeholder="请选择" @change="handleColumnSearch">
+                                <el-option
+                                v-for="s in item.selectOptions"
+                                :key="s.value"
+                                :label="s.label"
+                                :value="s.value">
+                                </el-option>
+                            </el-select>
+                             <el-input v-else="item.type==='input'" v-model="columnSearch[scope.column.property]" size="mini" @keyup.enter.native="handleColumnSearch"></el-input>
+                        </div>
                         <span v-else>{{ scope.row[scope.column.property] }}</span>
                     </template>
                 </el-table-column>
@@ -107,47 +109,65 @@
 <script>
 const tableColumns = [
     {
-        label: "合同号",
+        label: '序号',
+        prop: 'index',
+        width: 60
+    },
+    {
+        label: '合同号',
         prop: 'contractId'
     },
     {
-        label: "发车日期",
-        prop: 'startDate'
+        label: '发车日期',
+        prop: 'startDate',
+        width: 200,
+        type: 'date'
     },
     {
-        label: "发车状态",
-        prop: 'prop1'
+        label: '发车状态',
+        prop: 'prop1',
+        type: 'select',
+        selectOptions: [
+            {
+                label: '已发出',
+                value: '已发出'
+            },
+            {
+                label: '未发车',
+                value: '未发车'
+            }
+        ]
     },
     {
-        label: "发车网点",
+        label: '发车网点',
         prop: 'prop2'
     },
     {
-        label: "卸货网点",
+        label: '卸货网点',
         prop: 'prop3'
     },
     {
-        label: "车牌号",
+        label: '车牌号',
         prop: 'prop4'
     },
     {
-        label: "联系方式",
+        label: '联系方式',
         prop: 'prop5'
     },
     {
-        label: "调度员",
+        label: '调度员',
         prop: 'prop6'
     },
     {
-        label: "总件数",
+        label: '总件数',
         prop: 'prop7'
     },
     {
-        label: "总重量（公斤）",
+        label: '总重量（公斤）',
         prop: 'prop8'
     },
     {
-        label: "总体积（立方）",
+        label: '总体积（立方）',
         prop: 'prop9'
     }
 ]
@@ -167,11 +187,55 @@ export default {
             tableData: [{
                 index: '1',
                 contractId: '18004001',
-                startDate: '2018-7-19'
+                startDate: '2018-7-19',
+                prop1: '已发出',
+                prop2: 'C点',
+                prop3: 'A点',
+                prop4: '沪A123456',
+                prop5: '19250987908',
+                prop6: '李四',
+                prop7: '200',
+                prop8: '20',
+                prop9: '40'
             }, {
                 index: '2',
                 contractId: '18004002',
-                startDate: '2018-7-20'
+                startDate: '2018-7-19',
+                prop1: '已发出',
+                prop2: 'B点',
+                prop3: 'A点',
+                prop4: '沪B123456',
+                prop5: '19279085098',
+                prop6: '张三',
+                prop7: '500',
+                prop8: '20',
+                prop9: '50'
+            }, {
+                index: '3',
+                contractId: '18004003',
+                startDate: '2018-7-19',
+                prop1: '未发车',
+                prop2: 'C点',
+                prop3: 'D点',
+                prop4: '沪B123456',
+                prop5: '19250987908',
+                prop6: '张三',
+                prop7: '200',
+                prop8: '20',
+                prop9: '40'
+            }, {
+                index: '4',
+                contractId: '18004004',
+                startDate: '2018-7-19',
+                prop1: '未发车',
+                prop2: 'H点',
+                prop3: 'A点',
+                prop4: '沪A123456',
+                prop5: '19279085098',
+                prop6: '李四',
+                prop7: '500',
+                prop8: '20',
+                prop9: '50'
             }],
             // 列选择dialog开关
             dialogChooseColumnVisible: false,
@@ -214,8 +278,23 @@ export default {
         },
         // 进行列查询
         handleColumnSearch() {
-            console.log(this.columnSearch)
-            this.toggleColumnSearch()
+            this.tableData = this.tableData.filter(item => {
+                if (item.isColumnSearch) {
+                    return true
+                }
+                for (let key in this.columnSearch) {
+                    if (this.columnSearch[key] instanceof Date) {
+                        let date = new Date(this.columnSearch[key])
+                        let formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+                        if (item[key] !== formatDate) {
+                            return false
+                        }
+                    } else if (this.columnSearch[key] !== item[key]) {
+                        return false
+                    }
+                }
+                return true
+            })
         }
     }
 }
