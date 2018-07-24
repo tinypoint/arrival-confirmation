@@ -297,13 +297,15 @@ export default {
                     return true
                 }
                 for (let key in this.columnSearch) {
-                    if (this.columnSearch[key] instanceof Date) {
+                    if (this.columnSearch[key] === '') {
+                        // do nothing
+                    } else if (this.columnSearch[key] instanceof Date) {
                         let date = new Date(this.columnSearch[key])
                         let formatDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
                         if (item[key] !== formatDate) {
                             return false
                         }
-                    } else if (this.columnSearch[key] !== item[key]) {
+                    } else if (item[key].indexOf(this.columnSearch[key]) < 0) {
                         return false
                     }
                 }
