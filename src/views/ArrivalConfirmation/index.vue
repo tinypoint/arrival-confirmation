@@ -28,12 +28,12 @@
                     <el-input v-model="formFilter.contractId" placeholder="请输入合同号" ></el-input>
                 </el-form-item>
                 <el-form-item label="发车状态">
-                    <el-select v-model="formFilter.carStatus" placeholder="请选择" style="width: 120px">
-                        <el-option label="全部" value="all"></el-option>
-                        <el-option label="已调度" value="dispatched"></el-option>
-                        <el-option label="已装车" value="loaded"></el-option>
-                        <el-option label="已发车" value="started"></el-option>
-                        <el-option label="已到货" value="arrivaled"></el-option>
+                    <el-select v-model="formFilter.carStatus" :clearable="true" placeholder="请选择" style="width: 120px">
+                        <el-option label="全部" value="全部"></el-option>
+                        <el-option label="已调度" value="已调度"></el-option>
+                        <el-option label="已装车" value="已装车"></el-option>
+                        <el-option label="已发车" value="已发车"></el-option>
+                        <el-option label="已到货" value="已到货"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="发车日期">
@@ -46,7 +46,7 @@
                     </el-col>
                 </el-form-item>
                 <el-form-item label="网点">
-                    <el-input v-model="formFilter.site" placeholder="请输入网点"></el-input>
+                    <el-input v-model="formFilter.startSite" placeholder="请输入网点"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button size="mini" type="primary" @click="handleClickSearch">查询</el-button>
@@ -76,7 +76,7 @@
                     <template slot-scope="scope">
                         <div v-if="scope.$index === 0 && openColumnSearch">
                             <el-date-picker v-if="item.type==='date'" v-model="columnSearch[scope.column.property]" size="mini" type="date" style="width:100%;" @change="handleColumnSearch"></el-date-picker>
-                            <el-select v-else-if="item.type==='select'" v-model="columnSearch[scope.column.property]" size="mini" placeholder="请选择" @change="handleColumnSearch">
+                            <el-select v-else-if="item.type==='select'" v-model="columnSearch[scope.column.property]" :clearable="true" size="mini" placeholder="请选择" @change="handleColumnSearch">
                                 <el-option
                                 v-for="s in item.selectOptions"
                                 :key="s.value"
@@ -125,22 +125,30 @@ const tableColumns = [
     },
     {
         label: '发车状态',
-        prop: 'prop1',
+        prop: 'carStatus',
         type: 'select',
         selectOptions: [
             {
-                label: '已发出',
-                value: '已发出'
+                label: '已调度',
+                value: '已调度'
             },
             {
-                label: '未发车',
-                value: '未发车'
+                label: '已装车',
+                value: '已装车'
+            },
+            {
+                label: '已发车',
+                value: '已发车'
+            },
+            {
+                label: '已到货',
+                value: '已到货'
             }
         ]
     },
     {
         label: '发车网点',
-        prop: 'prop2'
+        prop: 'startSite'
     },
     {
         label: '卸货网点',
@@ -174,9 +182,9 @@ const tableColumns = [
 const mockData = [{
     index: '1',
     contractId: '18004001',
-    startDate: '2018-7-19',
-    prop1: '已发出',
-    prop2: 'C点',
+    startDate: '2018-7-29',
+    carStatus: '已调度',
+    startSite: 'C点',
     prop3: 'A点',
     prop4: '沪A123456',
     prop5: '19250987908',
@@ -187,9 +195,9 @@ const mockData = [{
 }, {
     index: '2',
     contractId: '18004002',
-    startDate: '2018-7-19',
-    prop1: '已发出',
-    prop2: 'B点',
+    startDate: '2018-2-19',
+    carStatus: '已调度',
+    startSite: 'B点',
     prop3: 'A点',
     prop4: '沪B123456',
     prop5: '19279085098',
@@ -200,9 +208,9 @@ const mockData = [{
 }, {
     index: '3',
     contractId: '18004003',
-    startDate: '2018-7-19',
-    prop1: '未发车',
-    prop2: 'C点',
+    startDate: '2018-1-19',
+    carStatus: '已发车',
+    startSite: 'C点',
     prop3: 'D点',
     prop4: '沪B123456',
     prop5: '19250987908',
@@ -213,9 +221,9 @@ const mockData = [{
 }, {
     index: '4',
     contractId: '18004004',
-    startDate: '2018-7-19',
-    prop1: '未发车',
-    prop2: 'H点',
+    startDate: '2018-9-19',
+    carStatus: '已发车',
+    startSite: 'H点',
     prop3: 'A点',
     prop4: '沪A123456',
     prop5: '19279085098',
@@ -224,6 +232,33 @@ const mockData = [{
     prop8: '20',
     prop9: '50'
 }]
+
+function date2String(date) {
+    let _date = new Date(date)
+    return `${_date.getFullYear()}-${_date.getMonth() + 1}-${_date.getDate()}`
+}
+
+function string2Date(date) {
+    let _date = date.split('-')
+
+    return new Date(parseInt(_date[0], 10), parseInt(_date[1], 10) - 1, parseInt(_date[2], 10))
+}
+
+function compareDate(a, b) {
+    if (typeof a === 'string') {
+        a = string2Date(a)
+    }
+
+    if (typeof b === 'string') {
+        b = string2Date(b)
+    }
+    return (a.getTime() - b.getTime())
+}
+
+function isNotEmpty(v) {
+    return typeof v !== 'undefined' &&  v !== null && v !== ''
+}
+
 export default {
     data () {
         return {
@@ -234,9 +269,10 @@ export default {
                 carStatus: '',
                 startDate: '',
                 endDate: '',
-                site: ''
+                startSite: ''
             },
             tableData: mockData.slice(),
+            cachedDate: mockData.slice(),
             // 列选择dialog开关
             dialogChooseColumnVisible: false,
             // 列表表头数据
@@ -252,7 +288,43 @@ export default {
             // do something
         },
         handleClickSearch() {
-            console.log(this.formFilter)
+            let { contractId, carStatus, startDate, endDate, startSite } = this.formFilter
+
+            let result = mockData.filter(item => {
+                if (isNotEmpty(contractId) && item.contractId.indexOf(contractId) < 0) {
+                    return false
+                }
+                if (isNotEmpty(carStatus) && (carStatus !== '全部') && item.carStatus.indexOf(carStatus) < 0) {
+                    return false
+                }
+                if (isNotEmpty(startSite) && item.startSite.indexOf(startSite) < 0) {
+                    return false
+                }
+                if (isNotEmpty(startDate) && isNotEmpty(endDate)) {
+                    if (!((compareDate(item.startDate, startDate) >= 0) && (compareDate(endDate, item.startDate) >= 0))) {
+                        return false
+                    }
+                } else if (isNotEmpty(startDate) && (compareDate(item.startDate, startDate) < 0)) {
+                    return false
+                } else if (isNotEmpty(endDate) && (compareDate(endDate, item.startDate) < 0)) {
+                    return false
+                }
+
+                return true
+            })
+
+            this.tableData = (this.openColumnSearch ? [{
+                isColumnSearch: true
+            }] : [] ).concat(result)
+
+            this.formFilter = {
+                contractId: '',
+                carStatus: '',
+                startDate: '',
+                endDate: '',
+                startSite: ''
+            }
+            this.cachedDate = result.slice();
         },
         // 点击列表某一行时触发
         handleClickRow(row) {
@@ -262,14 +334,14 @@ export default {
         // 点击列查询按钮
         toggleColumnSearch() {
             if (this.openColumnSearch) {
-                if (this.tableData[0].isColumnSearch) {
+                if (this.tableData[0] || this.tableData[0].isColumnSearch) {
                     this.tableData.shift();
                 }
                 this.openColumnSearch = false
                 this.columnSearch = {}
             } else {
                 this.openColumnSearch = true
-                if (!this.tableData[0].isColumnSearch) {
+                if (this.tableData.length === 0 || !this.tableData[0].isColumnSearch) {
                     this.tableData.unshift({
                         isColumnSearch: true
                     })
@@ -280,19 +352,18 @@ export default {
         handleColumnSearch() {
             let values = Object.values(this.columnSearch);
             let isEmpty = values.every(value => {
-                return typeof value === undefined || value === ''
+                return typeof value === undefined || value === '' || value === null
             }) || values.length === 0
 
             if (isEmpty) {
                 this.columnSearch = {}
-                let newData = mockData.slice();
-                newData.unshift({
+
+                this.tableData = (this.openColumnSearch ? [{
                     isColumnSearch: true
-                })
-                this.tableData = newData
+                }] : [] ).concat(this.cachedDate)
             }
             
-            this.tableData = this.tableData.filter(item => {
+            let result = this.cachedDate.filter(item => {
                 if (item.isColumnSearch) {
                     return true
                 }
@@ -311,6 +382,10 @@ export default {
                 }
                 return true
             })
+
+            this.tableData = (this.openColumnSearch ? [{
+                isColumnSearch: true
+            }] : [] ).concat(result)
         }
     }
 }
